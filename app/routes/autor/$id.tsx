@@ -1,8 +1,8 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Data, Author, getAuthorById, search } from "../services/authorService";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Data, Author, getAuthorById, search } from "../../services/authorService";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 
 // Función loader para cargar los datos del autor

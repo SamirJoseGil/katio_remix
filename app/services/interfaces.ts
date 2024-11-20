@@ -11,6 +11,8 @@ export interface Author {
     lastName: string;
     country: string;
     birthDate: string;
+    profilePicture: string;
+    biography: string;
 }
 
 export interface Narrator {
@@ -23,8 +25,8 @@ export interface Narrator {
 export interface Audiobook {
     id: number;
     name: string;
-    isbn10: string;
-    isbn13: string;
+    isbN10: string;
+    isbN13: string;
     published: string;
     edition: string;
     genre: string;

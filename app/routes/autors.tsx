@@ -1,8 +1,15 @@
+<<<<<<< Updated upstream
 import { useState } from 'react';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Data, Author, getAllAuthors, search } from '~/services/authorService';
+=======
+import { useRef, useState } from "react";
+import { useLoaderData, Link } from "@remix-run/react";
+import { getAllAuthors, search } from "~/services/authorService";
+import { Data, Author } from "~/services/interfaces"
+>>>>>>> Stashed changes
 
 export function loader() {
     return getAllAuthors();
@@ -24,14 +31,21 @@ export default function Autors() {
             const response = await search(searchTerm);
             const authors = response.responseElements;
             if (authors.length === 0) {
+<<<<<<< Updated upstream
                 setSearchError('No se encontró el autor');
+=======
+>>>>>>> Stashed changes
                 setIsModalOpen(true);
             } else {
                 setSearchResults(authors);
             }
+<<<<<<< Updated upstream
         } catch (error) {
             console.error('Error fetching author:', error);
             setSearchError('No se encontró el autor');
+=======
+        } catch {
+>>>>>>> Stashed changes
             setIsModalOpen(true);
         }
     };
@@ -47,10 +61,20 @@ export default function Autors() {
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100">
             <NavBar />
+<<<<<<< Updated upstream
             <div>
                 <div className='navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container'>
                     <div className='mx-20'>
                         <a href="/autores" className='btn btn-ghost text-xl'>Autores</a>
+=======
+            <div className="my-10">
+                <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
+                    <div className="mx-20">
+                        <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
+                        <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
+                        <a href="/books" className="btn btn-ghost text-xl">Libros</a>
+                        <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
+>>>>>>> Stashed changes
                     </div>
                     <div className='flex-none gap-2 mx-10'>
                         <div className="relative w-full">
@@ -93,7 +117,12 @@ export default function Autors() {
                                         lastName={item.lastName}
                                         country={item.country}
                                         birthDate={item.birthDate}
+<<<<<<< Updated upstream
                                         onMoreInfo={handleMoreInfo}
+=======
+                                        profilePicture={item.profilePicture}
+                                        biography={item.biography}
+>>>>>>> Stashed changes
                                     />
                                 ))}
                             </div>
@@ -107,14 +136,35 @@ export default function Autors() {
     );
 }
 
+<<<<<<< Updated upstream
 function AuthorCard({ name, lastName, country, birthDate, id, onMoreInfo }: Author & { onMoreInfo: (id: number) => void }) {
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className='card-body place-content-between'>
                 <h4 className='card-title text-black font-bold'>{name} {lastName}</h4>
                 <div className='my-4 text-stone-700'>
+=======
+function Card({ id, name, lastName, country, birthDate, profilePicture }: Author) {
+    const imageRef = useRef<HTMLImageElement | null>(null);
+
+    return (
+        <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
+            <div className="card-body place-content-between">
+                <h4 className="card-title text-black font-bold">
+                    {name} {lastName}
+                </h4>
+                <div className="my-1 text-stone-700">
+>>>>>>> Stashed changes
                     <p>{country}</p>
                     <p>{birthDate}</p>
+                </div>
+                <div className="my-1 flex justify-center">
+                    <img
+                        ref={imageRef}
+                        src={profilePicture}
+                        alt={`${name} cover`}
+                        className="w-48 h-auto rounded-3xl"
+                    />
                 </div>
                 <div className="card-actions justify-center">
                     <button className="btn btn-outline btn-accent w-3/5" onClick={() => onMoreInfo(id)}>Más información</button>

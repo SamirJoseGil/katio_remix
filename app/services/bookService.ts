@@ -1,9 +1,11 @@
-export async function getAllBooks()
-{
-    const books = fetch("http://localhost:5170/api/Books/index");
-    return books;
-<<<<<<< Updated upstream
-=======
+export async function getAllBooks() {
+    const response = await fetch("http://localhost:5125/api/Book/GetBooks");
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    console.log(response);
+    const book = await response.json();
+    return book;
 }
 
 export async function search(searchTerm: string) {
@@ -32,5 +34,4 @@ export async function getBookById(id: number) {
     }
     const book = await response.json();
     return book
->>>>>>> Stashed changes
 }

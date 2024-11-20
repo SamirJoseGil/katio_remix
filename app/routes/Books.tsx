@@ -1,4 +1,8 @@
-import { useState } from "react";
+<<<<<<< Updated upstream
+import NavBar from "../components/Navbar"
+import Footer from "../components/Footer"
+=======
+import { useRef, useState } from "react";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getAllBooks, search } from "~/services/bookService";
 import { Data, Book } from "~/services/interfaces"
@@ -24,11 +28,11 @@ export default function Books() {
         try {
             const response = await search(searchTerm);
             const books = response.responseElements;
-        if (books.length === 0) {
-            setIsModalOpen(true);
-        } else {
-            setSearchResults(books);
-        }
+            if (books.length === 0) {
+                setIsModalOpen(true);
+            } else {
+                setSearchResults(books);
+            }
         } catch {
             setIsModalOpen(true);
         }
@@ -37,14 +41,26 @@ export default function Books() {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+>>>>>>> Stashed changes
 
+export default function books() {
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100">
+<<<<<<< Updated upstream
+        <div className="h-screen items-center justify-center bg-teal-100">
             <NavBar />
-            <div>
+            <h1 className="">books!</h1>
+            <div className="Navbar">
+
+=======
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
+            <NavBar />
+            <div className="my-10">
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
+                        <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
+                        <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
                         <a href="/books" className="btn btn-ghost text-xl">Libros</a>
+                        <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
                         <div className="relative w-full">
@@ -99,6 +115,7 @@ export default function Books() {
                                         isbN13={item.isbN13}
                                         published={item.published}
                                         edition={item.edition}
+                                        bookCover={item.bookCover}
                                     />
                                 ))}
                             </div>
@@ -112,13 +129,23 @@ export default function Books() {
     );
 }
 
-function Card({ name, isbN10, isbN13, published, edition, id }: Book) {
+function Card({ id, name, published, edition, bookCover }: Book) {
+    const imageRef = useRef<HTMLImageElement | null>(null);
+
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
                 <h4 className="card-title text-black font-bold">
                     {name}
                 </h4>
+                <div className="relative my-4 mx-auto">
+                    <img
+                        ref={imageRef}
+                        src={bookCover}
+                        alt={`${name} cover`}
+                        className="w-auto h-50 rounded-3xl"
+                    />
+                </div>
                 <div className="my-4 text-stone-700">
                     <p>{edition}</p>
                     <p>{published}</p>
@@ -128,7 +155,10 @@ function Card({ name, isbN10, isbN13, published, edition, id }: Book) {
                         Más información
                     </Link>
                 </div>
+>>>>>>> Stashed changes
             </div>
+            <button className="btn btn-primary"><a href="/">Inicio</a></button>
+            <Footer />
         </div>
-    );
+    )
 }

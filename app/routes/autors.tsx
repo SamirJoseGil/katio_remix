@@ -39,7 +39,7 @@ export default function Autors() {
     };
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <NavBar />
             <div className="my-10">
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">

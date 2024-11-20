@@ -18,7 +18,7 @@ export default function BookDetail() {
     const book = useLoaderData<Book>();
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <Navbar />
             <div className="grid grid-cols-2 mx-10">
                 <div className="justify-center items-center">

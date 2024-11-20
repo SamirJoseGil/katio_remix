@@ -8,8 +8,7 @@ export async function getAllNarrators() {
 }
 
 export async function search(searchTerm: string) {
-    const response = await fetch(`http://localhost:5125/api/Narrator/search?searchTerm=${searchTerm}`, {
-        method: 'POST',
+    const response = await fetch(`http://localhost:5125/api/Narrator/SearchNarrator?searchTerm=${searchTerm}`, {
     });
     if (!response.ok) {
         throw new Error("Network response was not ok");

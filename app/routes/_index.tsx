@@ -5,9 +5,9 @@ import 'animate.css';
 
 export default function Index() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-16">
       <Navbar />
-      <div>
+      <div className="">
         <div className="relative flex-1 h-screen">
           <div className="h-screen absolute inset-0 bg-cover bg-[url('/public/img/MainBackground.jpg')]">
             <div className="absolute inset-0 backdrop-blur-sm bg-black bg-opacity-30"></div>

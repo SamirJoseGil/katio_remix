@@ -6,7 +6,7 @@ import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Data, Audiobook } from '~/services/interfaces';
 import NotFoundModal from '~/components/NotFoundModal';
-import { calculateAverageColor } from '~/components/calculateAverageColor';
+import { calculateAverageColor } from '~/components/Utils';
 
 export function loader() {
     return getAllAudioBooks();
@@ -34,9 +34,9 @@ export default function AudioBooks() {
     };
 
     return (
-        <div className="items-center justify-center bg-white pt-16">
+        <div className="items-center justify-center bg-slate-100">
             <NavBar />
-            <div className='my-10 bg-white'>
+            <div className='my-10'>
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
@@ -120,12 +120,12 @@ function Card({ id, name, published, edition, frontPage }: Audiobook) {
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
                 <h4 className="card-title text-black font-bold">{name}</h4>
-                <div className="relative my-4 mx-auto">
+                <div className="relative my-4">
                     <img
                         ref={imageRef}
                         src={frontPage}
                         alt={`${name} cover`}
-                        className="w-auto h-50 rounded-3xl"
+                        className="w-full h-auto rounded-3xl"
                     />
                 </div>
                 <div className='my-4 text-stone-700'>

@@ -6,7 +6,7 @@ import { Author } from "~/services/interfaces";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import { useEffect, useRef, useState } from "react";
-import { calculateAverageColor } from "~/components/calculateAverageColor";
+import { calculateAverageColor } from "~/components/Utils";
 
 
 // Loader para obtener los detalles del autor
@@ -33,7 +33,7 @@ export default function AuthorDetail() {
     }, [author.profilePicture]);
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
+        <div className="items-center justify-center min-h-screen bg-slate-100">
             <Navbar />
             <div className="grid grid-cols-12 mx-20 my-10">
                 <div className="justify-center items-center col-start-1 col-end-6 row-start-1">

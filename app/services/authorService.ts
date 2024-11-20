@@ -8,7 +8,7 @@ export async function getAllAuthors() {
 }
 
 export async function search(searchTerm: string) {
-    const response = await fetch(`http://localhost:5125/api/Author/search?searchTerm=${searchTerm}`, {
+    const response = await fetch(`http://localhost:5125/api/Author/SearchAuthor?searchTerm=${searchTerm}`, {
         method: 'POST',
     });
     if (!response.ok) {

@@ -6,7 +6,7 @@ import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Data, Narrator } from '~/services/interfaces';
 import NotFoundModal from '~/components/NotFoundModal';
-import { calculateAverageColor } from '~/components/Utils';
+import { calculateAverageColor } from '~/components/calculateAverageColor';
 
 export function loader() {
     return getAllNarrators();
@@ -34,7 +34,7 @@ export default function Narrators() {
     };
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <NavBar />
             <div className='my-10'>
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">

@@ -7,7 +7,7 @@ import Footer from "~/components/Footer";
 
 import { Audiobook } from "~/services/interfaces";
 import { useEffect, useRef, useState } from "react";
-import { calculateAverageColor } from "~/components/Utils";
+import { calculateAverageColor } from "~/components/calculateAverageColor";
 
 // Loader para obtener los detalles del audiolibro
 export const loader: LoaderFunction = async ({ params }) => {
@@ -35,7 +35,7 @@ export default function AudioBookDetail() {
     }, [audioBook.frontPage]);
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <Navbar />
             <div className="grid grid-cols-11 mx-20 my-10">
                 <div className="justify-center items-center col-start-1 col-end-6">

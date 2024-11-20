@@ -8,8 +8,7 @@ export async function getAllAudioBooks() {
 }
 
 export async function search(searchTerm: string) {
-    const response = await fetch(`http://localhost:5125/api/AudioBook/search?searchTerm=${searchTerm}`, {
-        method: 'POST',
+    const response = await fetch(`http://localhost:5125/api/AudioBook/SearchAudioBook?searchTerm=${searchTerm}`, {
     });
     if (!response.ok) {
         throw new Error("Network response was not ok");

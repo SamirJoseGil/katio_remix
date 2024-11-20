@@ -15,6 +15,19 @@ export interface Author {
     biography: string;
 }
 
+<<<<<<< Updated upstream
+=======
+export interface Book {
+    id: number;
+    name: string;
+    isbN10: string;
+    isbN13: string;
+    edition: string;
+    published: string;
+    bookCover: string;
+}
+
+>>>>>>> Stashed changes
 export interface Narrator {
     id: number;
     name: string;

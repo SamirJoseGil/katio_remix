@@ -13,6 +13,15 @@ export interface Author {
     birthDate: string;
 }
 
+export interface Book {
+    id: number;
+    name: string;
+    isbN10: string;
+    isbN13: string;
+    edition: string;
+    published: string;
+}
+
 export interface Narrator {
     id: number;
     name: string;

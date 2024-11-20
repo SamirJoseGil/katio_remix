@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getAllAuthors, search } from "~/services/authorService";
 import { Data, Author } from "~/services/interfaces"
@@ -24,11 +24,11 @@ export default function Autors() {
         try {
             const response = await search(searchTerm);
             const authors = response.responseElements;
-        if (authors.length === 0) {
-            setIsModalOpen(true);
-        } else {
-            setSearchResults(authors);
-        }
+            if (authors.length === 0) {
+                setIsModalOpen(true);
+            } else {
+                setSearchResults(authors);
+            }
         } catch {
             setIsModalOpen(true);
         }
@@ -41,9 +41,12 @@ export default function Autors() {
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100">
             <NavBar />
-            <div>
+            <div className="my-10">
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
+                        <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
+                        <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
+                        <a href="/books" className="btn btn-ghost text-xl">Libros</a>
                         <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
@@ -98,6 +101,8 @@ export default function Autors() {
                                         lastName={item.lastName}
                                         country={item.country}
                                         birthDate={item.birthDate}
+                                        profilePicture={item.profilePicture}
+                                        biography={item.biography}
                                     />
                                 ))}
                             </div>
@@ -111,16 +116,26 @@ export default function Autors() {
     );
 }
 
-function Card({ name, lastName, country, birthDate, id }: Author) {
+function Card({ id, name, lastName, country, birthDate, profilePicture }: Author) {
+    const imageRef = useRef<HTMLImageElement | null>(null);
+
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
                 <h4 className="card-title text-black font-bold">
                     {name} {lastName}
                 </h4>
-                <div className="my-4 text-stone-700">
+                <div className="my-1 text-stone-700">
                     <p>{country}</p>
                     <p>{birthDate}</p>
+                </div>
+                <div className="my-1 flex justify-center">
+                    <img
+                        ref={imageRef}
+                        src={profilePicture}
+                        alt={`${name} cover`}
+                        className="w-48 h-auto rounded-3xl"
+                    />
                 </div>
                 <div className="card-actions justify-center">
                     <Link to={`/autor/${id}`} className="btn btn-outline btn-accent w-3/5">

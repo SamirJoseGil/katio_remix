@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useLoaderData, Link } from "@remix-run/react";
-import { getAllNarrators, search } from "~/services/narratorService";
-import { Data, Narrator } from "~/services/interfaces"
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import { getAllNarrators, search } from '~/services/narratorService';
 
-import NotFoundModal from "~/components/NotFoundModal";
-import NavBar from "~/components/Navbar";
-import Footer from "~/components/Footer";
+import NavBar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { Data, Narrator } from '~/services/interfaces';
+import NotFoundModal from '~/components/NotFoundModal';
+import { calculateAverageColor } from '~/components/Utils';
 
-// Loader para obtener la lista de autores
 export function loader() {
     return getAllNarrators();
 }
 
-export default function Autors() {
-    const data = useLoaderData<Data<Narrator>>();
+export default function Narrators() {
+    const data = useLoaderData() as Data<Narrator>;
     const [searchResults, setSearchResults] = useState<Narrator[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -21,11 +21,11 @@ export default function Autors() {
     const handleSearch = async () => {
         setSearchResults([]);
         const response = await search(searchTerm);
-        const authors = response.responseElements;
-        if (authors.length === 0) {
+        const narrator = response.responseElements;
+        if (narrator.length === 0) {
             setIsModalOpen(true);
         } else {
-            setSearchResults(authors);
+            setSearchResults(narrator);
         }
     };
 
@@ -36,10 +36,13 @@ export default function Autors() {
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100">
             <NavBar />
-            <div>
+            <div className='my-10'>
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
-                        <a href="/autors" className="btn btn-ghost text-xl">Narradores</a>
+                        <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
+                        <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
+                        <a href="/books" className="btn btn-ghost text-xl">Libros</a>
+                        <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
                         <div className="relative w-full">
@@ -105,14 +108,14 @@ export default function Autors() {
     );
 }
 
-function Card({ id, name, lastName, }: Narrator) {
+function Card({ id, name, lastName, genre }: Narrator) {
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold">
-                    {name} {lastName}
+                <h4 className="card-title text-black font-bold"> {name} {lastName}
                 </h4>
-                <div className="my-4 text-stone-700">
+                <div className='my-4 text-stone-700'>
+                    <p>{genre}</p>
                 </div>
                 <div className="card-actions justify-center">
                     <Link to={`/narrator/${id}`} className="btn btn-outline btn-accent w-3/5">

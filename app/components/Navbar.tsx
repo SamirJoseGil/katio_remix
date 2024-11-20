@@ -1,13 +1,17 @@
+import { Link } from "@remix-run/react";
+import { useState } from "react";
 
 
 
 
 export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     return (
         <div>
-<<<<<<< Updated upstream
-            <h2>Barra de navegacion</h2>
-=======
             {/* Barra de navegación fija */}
             <div className="navbar bg-violet-100 fixed top-0 left-0 w-full z-50 shadow-md">
                 <div className="flex-1">
@@ -99,7 +103,6 @@ export default function Navbar() {
                     onClick={closeMenu}
                 ></div>
             )}
->>>>>>> Stashed changes
         </div>
     )
 }

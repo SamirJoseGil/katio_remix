@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-import NavBar from "../components/Navbar"
-import Footer from "../components/Footer"
-=======
 import { useRef, useState } from "react";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getAllBooks, search } from "~/services/bookService";
@@ -41,17 +37,8 @@ export default function Books() {
     const closeModal = () => {
         setIsModalOpen(false);
     };
->>>>>>> Stashed changes
 
-export default function books() {
     return (
-<<<<<<< Updated upstream
-        <div className="h-screen items-center justify-center bg-teal-100">
-            <NavBar />
-            <h1 className="">books!</h1>
-            <div className="Navbar">
-
-=======
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <NavBar />
             <div className="my-10">
@@ -155,10 +142,7 @@ function Card({ id, name, published, edition, bookCover }: Book) {
                         Más información
                     </Link>
                 </div>
->>>>>>> Stashed changes
             </div>
-            <button className="btn btn-primary"><a href="/">Inicio</a></button>
-            <Footer />
         </div>
     )
 }

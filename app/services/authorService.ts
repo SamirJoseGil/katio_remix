@@ -1,23 +1,3 @@
-
-// Response Interfaces
-
-export interface Data {
-    message: string;
-    statusCode: string;
-    totalElements: number;
-    responseElements: Author[];
-} 
-
-export interface Author {
-    id: number;
-    name: string;
-    lastName: string;
-    country: string;
-    birthDate: string;
-}
-
-// Methods
-
 export async function getAllAuthors() {
     const response = await fetch("http://localhost:5125/api/Author/GetAuthors");
     if (!response.ok) {

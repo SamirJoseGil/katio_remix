@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLoaderData, Link } from "@remix-run/react";
-import { getAllAuthors, search } from "~/services/authorService";
-import { Data, Author } from "~/services/interfaces"
+import { getAllNarrators, search } from "~/services/narratorService";
+import { Data, Narrator } from "~/services/interfaces"
 
 import NotFoundModal from "~/components/NotFoundModal";
 import NavBar from "~/components/Navbar";
@@ -9,28 +9,23 @@ import Footer from "~/components/Footer";
 
 // Loader para obtener la lista de autores
 export function loader() {
-    return getAllAuthors();
+    return getAllNarrators();
 }
 
 export default function Autors() {
-    const data = useLoaderData<Data<Author>>();
-    const [searchResults, setSearchResults] = useState<Author[]>([]);
+    const data = useLoaderData<Data<Narrator>>();
+    const [searchResults, setSearchResults] = useState<Narrator[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = async () => {
         setSearchResults([]);
-
-        try {
-            const response = await search(searchTerm);
-            const authors = response.responseElements;
+        const response = await search(searchTerm);
+        const authors = response.responseElements;
         if (authors.length === 0) {
             setIsModalOpen(true);
         } else {
             setSearchResults(authors);
-        }
-        } catch {
-            setIsModalOpen(true);
         }
     };
 
@@ -44,13 +39,13 @@ export default function Autors() {
             <div>
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
-                        <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
+                        <a href="/autors" className="btn btn-ghost text-xl">Narradores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
                         <div className="relative w-full">
                             <input
                                 type="text"
-                                placeholder="Buscar un autor"
+                                placeholder="Buscar un narrador"
                                 className="input input-accent w-full bg-slate-100 border-slate-400 rounded-2xl border-2"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -86,18 +81,17 @@ export default function Autors() {
                             <strong className="text-slate-700">
                                 {searchResults.length > 0 ? searchResults.length : data.totalElements}
                             </strong>{" "}
-                            autores
+                            narradores
                         </h3>
                         <div className="container mx-11">
                             <div className="grid grid-cols-4 gap-4">
-                                {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Author) => (
+                                {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Narrator) => (
                                     <Card
                                         key={item.id}
                                         id={item.id}
                                         name={item.name}
                                         lastName={item.lastName}
-                                        country={item.country}
-                                        birthDate={item.birthDate}
+                                        genre={item.genre}
                                     />
                                 ))}
                             </div>
@@ -111,7 +105,7 @@ export default function Autors() {
     );
 }
 
-function Card({ name, lastName, country, birthDate, id }: Author) {
+function Card({ id, name, lastName, }: Narrator) {
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
@@ -119,11 +113,9 @@ function Card({ name, lastName, country, birthDate, id }: Author) {
                     {name} {lastName}
                 </h4>
                 <div className="my-4 text-stone-700">
-                    <p>{country}</p>
-                    <p>{birthDate}</p>
                 </div>
                 <div className="card-actions justify-center">
-                    <Link to={`/autor/${id}`} className="btn btn-outline btn-accent w-3/5">
+                    <Link to={`/narrator/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información
                     </Link>
                 </div>

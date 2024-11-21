@@ -1,36 +1,31 @@
-import { useRef, useState } from "react";
-import { useLoaderData, Link } from "@remix-run/react";
-import { getAllBooks, search } from "~/services/bookService";
-import { Data, Book } from "~/services/interfaces"
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import { getAllNarrators, search } from '~/services/narratorService';
 
-import NotFoundModal from "~/components/NotFoundModal";
-import NavBar from "~/components/Navbar";
-import Footer from "~/components/Footer";
+import NavBar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { Data, Narrator } from '~/services/interfaces';
+import NotFoundModal from '~/components/NotFoundModal';
+import { calculateAverageColor } from '~/components/calculateAverageColor';
 
-// Loader para obtener la lista de autores
 export function loader() {
-    return getAllBooks();
+    return getAllNarrators();
 }
 
-export default function Books() {
-    const data = useLoaderData<Data<Book>>();
-    const [searchResults, setSearchResults] = useState<Book[]>([]);
+export default function Narrators() {
+    const data = useLoaderData() as Data<Narrator>;
+    const [searchResults, setSearchResults] = useState<Narrator[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = async () => {
         setSearchResults([]);
-
-        try {
-            const response = await search(searchTerm);
-            const books = response.responseElements;
-            if (books.length === 0) {
-                setIsModalOpen(true);
-            } else {
-                setSearchResults(books);
-            }
-        } catch {
+        const response = await search(searchTerm);
+        const narrator = response.responseElements;
+        if (narrator.length === 0) {
             setIsModalOpen(true);
+        } else {
+            setSearchResults(narrator);
         }
     };
 
@@ -41,7 +36,7 @@ export default function Books() {
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <NavBar />
-            <div className="my-10">
+            <div className='my-10'>
                 <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
@@ -53,7 +48,7 @@ export default function Books() {
                         <div className="relative w-full">
                             <input
                                 type="text"
-                                placeholder="Buscar un libro"
+                                placeholder="Buscar un narrador"
                                 className="input input-accent w-full bg-slate-100 border-slate-400 rounded-2xl border-2"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -89,20 +84,17 @@ export default function Books() {
                             <strong className="text-slate-700">
                                 {searchResults.length > 0 ? searchResults.length : data.totalElements}
                             </strong>{" "}
-                            libros
+                            narradores
                         </h3>
                         <div className="container mx-11">
                             <div className="grid grid-cols-4 gap-4">
-                                {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Book) => (
+                                {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Narrator) => (
                                     <Card
                                         key={item.id}
                                         id={item.id}
                                         name={item.name}
-                                        isbN10={item.isbN10}
-                                        isbN13={item.isbN13}
-                                        published={item.published}
-                                        edition={item.edition}
-                                        bookCover={item.bookCover}
+                                        lastName={item.lastName}
+                                        genre={item.genre}
                                     />
                                 ))}
                             </div>
@@ -116,33 +108,21 @@ export default function Books() {
     );
 }
 
-function Card({ id, name, published, edition, bookCover }: Book) {
-    const imageRef = useRef<HTMLImageElement | null>(null);
-
+function Card({ id, name, lastName, genre }: Narrator) {
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold">
-                    {name}
+                <h4 className="card-title text-black font-bold"> {name} {lastName}
                 </h4>
-                <div className="relative my-4 mx-auto">
-                    <img
-                        ref={imageRef}
-                        src={bookCover}
-                        alt={`${name} cover`}
-                        className="w-auto h-50 rounded-3xl"
-                    />
-                </div>
-                <div className="my-4 text-stone-700">
-                    <p>{edition}</p>
-                    <p>{published}</p>
+                <div className='my-4 text-stone-700'>
+                    <p>{genre}</p>
                 </div>
                 <div className="card-actions justify-center">
-                    <Link to={`/book/${id}`} className="btn btn-outline btn-accent w-3/5">
+                    <Link to={`/narrator/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información
                     </Link>
                 </div>
             </div>
         </div>
-    )
+    );
 }

@@ -20,11 +20,11 @@ export default function Base64Converter() {
   };
 
   return (
-    <div className="max-w-screen bg-white min-h-screen p-4">
+    <div className="max-w-screen bg-slate-100 min-h-screen p-4">
       <h1 className="text-6xl font-bold text-center mb-8">Base64 Converter</h1>
       <div className="flex flex-wrap justify-center">
         <div className="w-full md:w-1/2 p-4">
-          <div className="bg-white shadow-2xl border rounded-lg p-4 shadow-xl">
+          <div className="bg-slate-100 shadow-2xl border rounded-lg p-4 shadow-xl">
             <h2 className="text-xl font-semibold mb-2">Upload Image</h2>
             <ImageToBase64 onBase64Generated={handleBase64Generated} />
             {base64Image && (
@@ -37,7 +37,7 @@ export default function Base64Converter() {
           </div>
         </div>
         <div className="w-full md:w-1/2 p-4">
-          <div className="bg-white shadow-2xl border rounded-lg p-4">
+          <div className="bg-slate-100 shadow-2xl border rounded-lg p-4">
             <h2 className="text-xl font-semibold mb-2">Converted Image</h2>
             {loading ? (
               <div className="animate__animated animate__fadeIn">

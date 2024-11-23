@@ -12,11 +12,11 @@ export default function Navbar() {
 
     return (
         <div>
-            {/* Barra de navegación fija */}
-            <div className="navbar bg-violet-100 fixed top-0 left-0 w-full z-50 shadow-md">
+            <div className="navbar bg-base-100 fixed top-0 left-0 w-full z-50 shadow-md">
                 <div className="flex-1">
-                    <Link to="/" className="btn btn-ghost text-xl text-zinc-950">
-                        Katio
+                    <img className="w-16 mx-5 h-auto" src="../../public/img/logo1secretos.png" alt="" />
+                    <Link to="/" className="btn btn-ghost text-xl text-white">
+                        Biblioteca Virtual Secretos Para Contar
                     </Link>
                 </div>
                 <div className="flex-none">
@@ -28,7 +28,7 @@ export default function Navbar() {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            className="inline-block h-5 w-5 stroke-current text-zinc-950"
+                            className="inline-block h-5 w-5 stroke-current text-white"
                         >
                             <path
                                 strokeLinecap="round"
@@ -43,13 +43,12 @@ export default function Navbar() {
 
             {/* Menú lateral */}
             <div
-                className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-40 ${
-                    isMenuOpen ? "translate-x-0" : "translate-x-full"
-                }`}
+                className={`fixed top-0 right-0 h-full w-64 bg-base-100 shadow-lg transform transition-transform duration-300 z-40 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
             >
                 <div className="p-6">
                     <h2 className="text-xl font-bold mb-4 mt-20">Menú</h2>
-                    <ul className="menu menu-compact">
+                    <ul className="menu menu-compact my-5">
                         <li>
                             <Link
                                 to="/books"

@@ -120,7 +120,7 @@ function Card({ id, name, lastName, country, birthDate, profilePicture }: Author
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     return (
-        <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
+        <div className="card card-compact w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
                 <h4 className="card-title text-black font-bold">
                     {name} {lastName}

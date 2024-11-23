@@ -5,7 +5,7 @@
 export default function SignUp() {
     return (
         <div className="flex min-h-screen bg-gray-100 items-center justify-center">
-            <div className="bg-white shadow-lg overflow-hidden rounded-3xl w-full max-w-xl">
+            <div className="bg-slate-100 shadow-lg overflow-hidden rounded-3xl w-full max-w-xl">
                 <div className="p-12">
                     {/* Título */}
                     <h2 className="text-4xl font-semibold text-center text-gray-800 mb-4">Crear Cuenta!

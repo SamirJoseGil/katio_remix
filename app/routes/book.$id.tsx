@@ -43,11 +43,11 @@ export default function BookDetail() {
                         <strong>{book.name}</strong>
                     </h1>
                     <div className="text-lg text-emerald-600 text-3xl mx-2">
-                        <p><strong className="text-slate-600 font-bold">ISBN-10:</strong> {book.isbN10}</p>
+                        <p><strong className="text-slate-600 font-bold">ISBN:</strong> {book.isbN10}</p>
                         <p><strong className="text-slate-600 font-bold">ISBN-13:</strong> {book.isbN13}</p>
                         <p><strong className="text-slate-600 font-bold">Publicacion:</strong> {book.published}</p>
                         <p><strong className="text-slate-600 font-bold">Edicion:</strong> {book.edition}</p>
-                        <p><strong className="text-slate-600 font-bold">Autor:</strong></p>
+                        <p><strong className="text-slate-600 font-bold">Autor:</strong><Link rel="stylesheet" to={`/autor/${book.authorId}`}>Ir a el Autor</Link></p>
                     </div>
                 </div>
                 <div className="justify-center items-center col-start-6 col-end-12">

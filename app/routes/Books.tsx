@@ -42,7 +42,7 @@ export default function Books() {
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
             <NavBar />
             <div className="my-10">
-                <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
+                <div className="navbar border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
                         <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
@@ -103,6 +103,8 @@ export default function Books() {
                                         published={item.published}
                                         edition={item.edition}
                                         bookCover={item.bookCover}
+                                        authorId={item.authorId}
+                                        author={item.author}
                                     />
                                 ))}
                             </div>
@@ -120,7 +122,7 @@ function Card({ id, name, published, edition, bookCover }: Book) {
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     return (
-        <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
+        <div className="card card-compact w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
                 <h4 className="card-title text-black font-bold">
                     {name}

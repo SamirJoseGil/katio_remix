@@ -23,6 +23,8 @@ export interface Book {
     edition: string;
     published: string;
     bookCover: string;
+    authorId: number;
+    author: Author;
 }
 
 export interface Narrator {

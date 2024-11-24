@@ -4,9 +4,18 @@
 
 html,
 body {
-  @apply bg-slate-100 dark:bg-gray-950;
+  @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  .bg-custom-beige {
+    background-color: #ecead3;
+  }
+  .text-custom-beige {
+    color: #ecead3;
   }
 }

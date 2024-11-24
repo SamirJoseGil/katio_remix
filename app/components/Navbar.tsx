@@ -12,9 +12,9 @@ export default function Navbar() {
 
     return (
         <div>
-            <div className="navbar bg-base-100 fixed top-0 left-0 w-full z-50 shadow-md">
+            <div className="navbar bg-custom-beige fixed top-0 left-0 w-full z-50 shadow-md">
                 <div className="flex-1">
-                    <img className="w-16 mx-5 h-auto" src="../../public/img/logo1secretos.png" alt="" />
+                    <img className="w-16 mx-5 h-auto" src="../../public/img/secretos-para-contar-naranja.png" alt="" />
                     <Link to="/" className="btn btn-ghost text-xl text-white">
                         Biblioteca Virtual Secretos Para Contar
                     </Link>
@@ -43,7 +43,7 @@ export default function Navbar() {
 
             {/* Menú lateral */}
             <div
-                className={`fixed top-0 right-0 h-full w-64 bg-base-100 shadow-lg transform transition-transform duration-300 z-40 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 h-full w-64 bg-custom-beige shadow-lg transform transition-transform duration-300 z-40 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 <div className="p-6">

@@ -4,9 +4,59 @@
 
 html,
 body {
-  @apply bg-slate-100 dark:bg-gray-950;
+  @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  /* Beige */
+  .bg-custom-beige {
+    background-color: #ecead3;
+  }
+  .text-custom-beige {
+    color: #ecead3;
+  }
+
+  /* Gray */
+  .bg-custom-gray {
+    background-color: #cfd5c8;
+  }
+  .text-custom-gray {
+    color: #cfd5c8;
+  }
+
+  /* Cream */
+  .bg-custom-cream {
+    background-color: #f7f5eb;
+  }
+  .text-custom-cream {
+    color: #f7f5eb;
+  }
+
+  /* Dark Blue */
+  .bg-custom-dark-blue {
+    background-color: #002847;
+  }
+  .text-custom-dark-blue {
+    color: #002847;
+  }
+
+  /* Blue */
+  .bg-custom-blue {
+    background-color: #618EB4;
+  }
+  .text-custom-blue {
+    color: #618EB4;
+  }
+
+  /* Light Gray */
+  .bg-custom-light-gray {
+    background-color: #e7e5d9;
+  }
+  .text-custom-light-gray {
+    color: #e7e5d9;
   }
 }

@@ -12,7 +12,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <div className="navbar bg-[#618EB4] fixed top-0 left-0 w-full z-30 shadow-md h-26">
+            <div className="navbar bg-custom-beige fixed top-0 left-0 w-full z-30 shadow-md h-26">
                 <div className="flex-1">
                     <img className="w-20 mx-6 h-auto" src="../../public/img/secretos-para-contar-naranja.png" alt="" />
                     <Link to="/" className="btn btn-ghost text-xl text-white">
@@ -28,7 +28,7 @@ export default function Navbar() {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            className="inline-block h-5 w-5 stroke-current text-white"
+                            className="inline-block h-8 w-8 stroke-current text-white"
                         >
                             <path
                                 strokeLinecap="round"
@@ -43,18 +43,18 @@ export default function Navbar() {
 
             {/* Menú lateral */}
             <div
-                className={`fixed top-0 right-0 h-full w-64 bg-[#618EB4] shadow-lg transform transition-transform duration-300 z-40 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 h-full w-64 bg-custom-beige shadow-lg transform transition-transform duration-300 z-40 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
 
                 <div className="p-6">
-                    <h2 className="text-white text-3xl font-bold mb-4 mt-20 ">Menú</h2>
+                    <h2 className="text-white text-3xl font-bold mb-4 mt-20 text-custom-dark-blue ">Menú</h2>
                 
                     <ul className=" text-white menu menu-compact my-5">
                         <li>
                             <Link
                                 to="/books"
-                                className="hover:bg-neutral-focus btn btn-ghost btn-accen"
+                                className="hover:bg-neutral-focus btn btn-ghost btn-accen text-custom-dark-blue"
                                 onClick={closeMenu}
                             >
                                 Libros
@@ -63,7 +63,7 @@ export default function Navbar() {
                         <li>
                             <Link
                                 to="/autors"
-                                className="hover:bg-neutral-focus btn btn-ghost"
+                                className="hover:bg-neutral-focus btn btn-ghost text-custom-dark-blue"
                                 onClick={closeMenu}
                             >
                                 Autores
@@ -72,7 +72,7 @@ export default function Navbar() {
                         <li>
                             <Link
                                 to="/audiobooks"
-                                className="hover:bg-neutral-focus btn btn-ghost"
+                                className="hover:bg-neutral-focus btn btn-ghost text-custom-dark-blue"
                                 onClick={closeMenu}
                             >
                                 Audio libros
@@ -81,7 +81,7 @@ export default function Navbar() {
                         <li>
                             <Link
                                 to="/narrators"
-                                className="hover:bg-neutral-focus btn btn-ghost"
+                                className="hover:bg-neutral-focus btn btn-ghost text-custom-dark-blue"
                                 onClick={closeMenu}
                             >
                                 Narradores
@@ -89,7 +89,7 @@ export default function Navbar() {
                         </li>
                     </ul>
                     <button
-                        className="mt-6 btn btn-sm btn-outline bg-[#618EB4]"
+                        className="mt-6 btn btn-sm btn-outline text-orange-500"
                         onClick={closeMenu}
                     >
                         Cerrar

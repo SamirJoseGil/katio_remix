@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="footer bg-[#618EB4] text-base-content p-10">
+        <footer className="footer bg-neutral text-base-content p-10">
             <aside>
                 <img className="w-50 h-50" src="../../public/img/logo1secretos.png" alt="" />
                 <p>

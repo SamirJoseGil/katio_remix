@@ -88,19 +88,7 @@ export default function AudioBooks() {
                         <div className="container mx-11">
                             <div className="grid grid-cols-4 gap-4">
                                 {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Audiobook) => (
-                                    <Card
-                                        key={item.id}
-                                        id={item.id}
-                                        name={item.name}
-                                        isbN10={item.isbN10}
-                                        isbN13={item.isbN13}
-                                        published={item.published}
-                                        edition={item.edition}
-                                        genre={item.genre}
-                                        lenghtInSeconds={item.lenghtInSeconds}
-                                        path={item.path}
-                                        frontPage={item.frontPage}
-                                    />
+                                    <Card key={item.id} {...item}/>
                                 ))}
                             </div>
                         </div>

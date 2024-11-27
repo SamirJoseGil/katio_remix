@@ -1,6 +1,6 @@
 import { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import { getByAuthorId } from "~/services/bookService";
 import { getAuthorById } from "~/services/authorService";
@@ -76,10 +76,6 @@ export default function AuthorDetail() {
         </div>
     );
 }
-
-
-
-
 
 function Card({ id, name, published, edition, bookCover }: Book) {
     const imageRef = useRef<HTMLImageElement | null>(null);

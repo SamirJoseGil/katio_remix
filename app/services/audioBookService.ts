@@ -34,3 +34,13 @@ export async function getAudioBookById(id: number) {
     const audioBook = await response.json();
     return audioBook
 }
+
+export async function getAudioBookByNarratorId(id: number) {
+    const response = await fetch(`http://localhost:5125/api/AudioBook/FindAudioBookByNarrator?narratorId=${id}`, {
+    });
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    const audioBook = await response.json();
+    return audioBook;
+}

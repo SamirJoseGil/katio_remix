@@ -5,7 +5,6 @@ import { ImageToBase64 } from "~/components/Base64Util";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 
-
 interface FormData {
     name: string;
     isbn10: string;
@@ -102,7 +101,7 @@ export default function CreateBook() {
     return (
         <div className="bg-slate-100 pt-28">
             <Navbar />
-            <div className="container mx-auto my-20">
+            <div className="container mx-auto my-20 min-h-screen">
                 <form onSubmit={handleSubmit} className="mx-20 bg-white shadow-md rounded-lg p-6 text-center">
                     <h2 className="text-2xl font-bold mb-4 text-slate-700">Crear Libro</h2>
                     <div className="grid grid-cols-2 gap-4">

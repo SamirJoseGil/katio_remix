@@ -21,7 +21,6 @@ export default function Index() {
             </div>
             <div className="my-10 animate__animated animate__fadeInUp">
               <Link to="#QuienEsKatio" className="btn btn-outline bg-custom-dark-blue text-2xl mr-10">Quien es Katio?</Link>
-              <Link to="/books" className="btn btn-outline bg-custom-dark-blue text-2xl">Ir a la Biblioteca</Link>
             </div>
           </div>
         </div>

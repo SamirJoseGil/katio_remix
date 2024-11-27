@@ -35,7 +35,7 @@ export default function AudioBookDetail() {
     }, [audioBook.frontPage]);
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <Navbar />
             <div className="grid grid-cols-11 mx-20 my-10">
                 <div className="justify-center items-center col-start-1 col-end-6">

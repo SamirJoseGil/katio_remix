@@ -14,26 +14,26 @@ export default function Navbar() {
         <div>
             <div className="navbar bg-custom-beige fixed top-0 left-0 w-full z-30 shadow-md h-26">
                 <div className="flex-1">
-                    <img className="w-20 mx-6 h-auto" src="../../public/img/secretos-para-contar-naranja.png" alt="" />
-                    <Link to="/" className="btn btn-ghost text-xl text-white">
-                        Katio
+                    <a href="/"><img className="w-24 mx-4 h-auto" src="../../public/img/secretos-para-contar-naranja.png" alt="" /></a>
+                    <Link to="/" className="btn btn-ghost  text-2xl text-white text-custom-dark-blue no-animation">
+                        Biblioteca Virtual Secretos Para Contar
                     </Link>
                 </div>
                 <div className="flex-none">
                     <button
-                        className="btn btn-square btn-ghost"
+                        className="btn btn-ghost"
                         onClick={() => setIsMenuOpen(true)}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current text-white"
+                            className="inline-block h-10 w-10 stroke-current custom-dark-blue"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                strokeWidth="2"
+                                strokeWidth="3"
                                 d="M4 6h16M4 12h16M4 18h16"
                             ></path>
                         </svg>
@@ -47,9 +47,9 @@ export default function Navbar() {
                     }`}
             >
 
-                <div className="p-6">
+                <div className="p-6 text-center">
                     <h2 className="text-white text-3xl font-bold mb-4 mt-20 text-custom-dark-blue ">Menú</h2>
-                
+
                     <ul className=" text-white menu menu-compact my-5">
                         <li>
                             <Link

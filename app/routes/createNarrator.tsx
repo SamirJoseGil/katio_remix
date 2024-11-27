@@ -28,7 +28,7 @@ export default function CreateNarrator() {
     };
 
     return (
-        <div className="items-center justify-center bg-slate-100 pt-16">
+        <div className="items-center justify-center bg-slate-100 pt-28">
             <Navbar />
             <div className="my-10 bg-slate-100">
                 <h1 className="text-center text-2xl text-slate-700 font-bold my-5">Crear un Narrador</h1>

@@ -17,7 +17,7 @@ export default function AuthorDetail() {
     const narrator = useLoaderData<Narrator>();
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <Navbar />
             <div className="grid grid-cols-2 mx-10">
                 <div className="justify-center items-center">

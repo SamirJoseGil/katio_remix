@@ -49,3 +49,12 @@ export async function createBook(formData: FormData) {
 
     return responseText;
 }
+
+export async function getByAuthorId(id: number) {
+    const response = await fetch(`http://localhost:5125/api/Book/GetBookByAuthor?AuthorId=${id}`);
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    const book = await response.json();
+    return book;
+}

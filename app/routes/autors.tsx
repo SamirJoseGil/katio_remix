@@ -205,21 +205,23 @@ function Card({ id, name, lastName, country, birthDate, profilePicture }: Author
     return (
         <div className="card card-compact w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold">
-                    {name} {lastName}
-                </h4>
+                <a href={`/autor/${id}`}>
+                    <h4 className="card-title text-black font-bold">{name} {lastName}</h4>
+                </a>
                 <div className="my-1 mx-auto">
-                    <img
+                    <a href={`/autor/${id}`}><img
                         ref={imageRef}
                         src={profilePicture}
                         alt={`${name} cover`}
                         className="w-auto h-64 rounded-3xl"
-                    />
+                    /></a>
                 </div>
-                <div className="my-4 text-stone-700">
-                    <p>{country}</p>
-                    <p>{year}</p>
-                </div>
+                <a href={`/autor/${id}`}>
+                    <div className="my-4 text-stone-700">
+                        <p>{country}</p>
+                        <p>{year}</p>
+                    </div>
+                </a>
                 <div className="card-actions justify-center">
                     <Link to={`/autor/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información

@@ -204,19 +204,25 @@ function Card({ id, name, published, edition, bookCover }: Book) {
     return (
         <div className="card card-compact w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold">{name}</h4>
-                <div className="my-4 mx-auto">
-                    <img
-                        ref={imageRef}
-                        src={bookCover}
-                        alt={`${name} cover`}
-                        className="w-auto h-64 rounded-3xl"
-                    />
-                </div>
-                <div className="my-4 text-stone-700">
-                    <p>{edition}</p>
-                    <p>{year}</p>
-                </div>
+                <a href={`/book/${id}`}>
+                    <h4 className="card-title text-black font-bold">{name}</h4>
+                </a>
+                <a href={`/book/${id}`}>
+                    <div className="my-4 mx-auto">
+                        <img
+                            ref={imageRef}
+                            src={bookCover}
+                            alt={`${name} cover`}
+                            className="w-auto h-64 rounded-3xl"
+                        />
+                    </div>
+                </a>
+                <a href={`/book/${id}`}>
+                    <div className="my-4 text-stone-700">
+                        <p>{edition}</p>
+                        <p>{year}</p>
+                    </div>
+                </a>
                 <div className="card-actions justify-center">
                     <Link to={`/book/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información

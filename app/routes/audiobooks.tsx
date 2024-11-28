@@ -205,19 +205,25 @@ function Card({ id, name, published, edition, frontPage }: Audiobook) {
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold">{name}</h4>
-                <div className="relative my-4 mx-auto">
-                    <img
-                        ref={imageRef}
-                        src={frontPage}
-                        alt={`${name} cover`}
-                        className="w-auto h-50 rounded-3xl"
-                    />
-                </div>
-                <div className='my-4 text-stone-700'>
-                    <p><strong>Publicado:</strong> {year}</p>
-                    <p><strong>Edición:</strong> {edition}</p>
-                </div>
+                <a href={`/audiobook/${id}`}>
+                    <h4 className="card-title text-black font-bold">{name}</h4>
+                </a>
+                <a href={`/audiobook/${id}`}>
+                    <div className="relative my-4 mx-auto">
+                        <img
+                            ref={imageRef}
+                            src={frontPage}
+                            alt={`${name} cover`}
+                            className="w-auto h-50 rounded-3xl"
+                        />
+                    </div>
+                </a>
+                <a href={`/audiobook/${id}`}>
+                    <div className='my-4 text-stone-700'>
+                        <p><strong>Publicado:</strong> {year}</p>
+                        <p><strong>Edición:</strong> {edition}</p>
+                    </div>
+                </a>
                 <div className="card-actions justify-center">
                     <Link to={`/audiobook/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información

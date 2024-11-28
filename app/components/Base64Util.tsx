@@ -3,22 +3,25 @@ import { ChangeEvent } from "react";
 // Function to convert an uploaded image to a Base64 string
 function ImageToBase64({ onBase64Generated }: { onBase64Generated: (base64: string) => void }) {
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          onBase64Generated(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+      const file = event.target.files?.[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              if (typeof reader.result === 'string') {
+                  onBase64Generated(reader.result);
+              }
+          };
+          reader.readAsDataURL(file);
+      }
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleImageUpload} />
-    </div>
+      <div className="flex flex-col items-center">
+          <label className="btn btn-outline btn-accent cursor-pointer">
+              Subir Portada
+              <input type="file" onChange={handleImageUpload} className="hidden" />
+          </label>
+      </div>
   );
 }
 

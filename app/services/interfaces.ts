@@ -32,6 +32,7 @@ export interface Narrator {
     name: string;
     lastName: string;
     genre: string;
+    profilePicture: string;
 }
 
 export interface Audiobook {
@@ -43,6 +44,7 @@ export interface Audiobook {
     edition: string;
     genre: string;
     lenghtInSeconds: number;
-    path: string;
     frontPage: string;
+    narratorId: number;
+    narrator: Narrator;
 }

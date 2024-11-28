@@ -60,3 +60,9 @@ body {
     color: #e7e5d9;
   }
 }
+
+textarea {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}

@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { getAllNarrators, search } from '~/services/narratorService';
 
+import { getAllNarrators, search } from '~/services/narratorService';
+import { Data, Narrator } from '~/services/interfaces';
+
+import NotFoundModal from '~/components/NotFoundModal';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Data, Narrator } from '~/services/interfaces';
-import NotFoundModal from '~/components/NotFoundModal';
-import { calculateAverageColor } from '~/components/calculateAverageColor';
 
 export function loader() {
     return getAllNarrators();
@@ -15,29 +15,95 @@ export function loader() {
 export default function Narrators() {
     const data = useLoaderData() as Data<Narrator>;
     const [searchResults, setSearchResults] = useState<Narrator[]>([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
 
-    const handleSearch = async () => {
-        setSearchResults([]);
-        const response = await search(searchTerm);
-        const narrator = response.responseElements;
-        if (narrator.length === 0) {
-            setIsModalOpen(true);
-        } else {
-            setSearchResults(narrator);
-        }
-    };
+    // Modal 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
 
+    // Barra de busqueda
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = async () => {
+        setSearchResults([]);
+
+        try {
+            const response = await search(searchTerm);
+            const narrator = response.responseElements;
+            if (narrator.length === 0) {
+                setIsModalOpen(true);
+            } else {
+                setSearchResults(narrator);
+            }
+        } catch {
+            setIsModalOpen(true)
+        }
+    };
+
+    // Organizar Lista
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const [sortBy, setSortBy] = useState<"name" | "genre" | "none">("none");
+    const [groupBy, setGroupBy] = useState<"none" | "firstLetter">("none");
+
+    const sortNarrators = (narrators: Narrator[]) => {
+        return narrators.sort((a, b) => {
+            if (sortBy === "name") {
+                return sortOrder === "asc"
+                    ? a.name.localeCompare(b.name)
+                    : b.name.localeCompare(a.name);
+            } else if (sortBy === "genre") {
+                return sortOrder === "asc"
+                    ? a.genre.localeCompare(a.genre)
+                    : b.name.localeCompare(b.genre);
+            } else {
+                return 0;
+            }
+        });
+    };
+
+    const Narrators = searchResults.length > 0 ? searchResults : data.responseElements;
+    const sortedNarrators = sortNarrators(Narrators);
+
+    const toggleGroupBy = () => {
+        setGroupBy(groupBy === "firstLetter" ? "none" : "firstLetter");
+    };
+
+    const toggleSortBy = () => {
+        if (sortBy === "none") {
+            setSortBy("name");
+        } else if (sortBy === "name") {
+            setSortBy("genre");
+        } else {
+            setSortBy("none");
+        }
+    };
+
+    const groupNarrators = (narrators: Narrator[]) => {
+        return narrators.reduce((groups: { [key: string]: Narrator[] }, narrator: Narrator) => {
+            const key = narrator.name[0].toUpperCase();
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(narrator);
+            return groups;
+        }, {});
+    };
+
+    const narratorsToDisplay = (): [string, Narrator[]][] | Narrator[] => {
+        const narrators = searchResults.length > 0 ? searchResults : data.responseElements;
+        const sortedNarrators = sortNarrators(narrators);
+        if (groupBy === "firstLetter") {
+            return Object.entries(groupNarrators(sortedNarrators));
+        }
+        return sortedNarrators;
+    };
+
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-16">
+        <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <NavBar />
-            <div className='my-10'>
-                <div className="navbar border-solid rounded-2xl border-2 border-slate-300 mx-auto justify-between container">
+            <div className='my-10 min-h-screen'>
+                <h1 className="text-5xl text-center my-2"><strong>Seccion de Narradores</strong></h1>
+                <div className="navbar border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
                         <a href="/narrators" className="btn btn-ghost text-xl">Narradores</a>
@@ -45,7 +111,7 @@ export default function Narrators() {
                         <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
-                        <div className="relative w-full">
+                        <div className="w-full">
                             <input
                                 type="text"
                                 placeholder="Buscar un narrador"
@@ -78,27 +144,49 @@ export default function Narrators() {
                     </div>
                 </div>
                 <div className={`${isModalOpen ? "blur-sm overflow-hidden" : ""}`}>
-                    <div className="card">
-                        <h3 className="card-title text-slate-500 m-4 mx-12">
-                            Se encontraron{" "}
-                            <strong className="text-slate-700">
-                                {searchResults.length > 0 ? searchResults.length : data.totalElements}
-                            </strong>{" "}
-                            narradores
-                        </h3>
-                        <div className="container mx-11">
+                    <h3 className="card-title text-slate-500 m-4 mx-12">
+                        Se encontraron{" "}
+                        <strong className="text-slate-700">
+                            {searchResults.length > 0 ? searchResults.length : data.totalElements}
+                        </strong>{" "}
+                        narradores
+                    </h3>
+                    <div className="flex my-5 mx-10">
+                        <button
+                            className={`btn btn-outline ${groupBy === "firstLetter" ? "bg-gray-700 text-white" : "bg-slate-100"}`}
+                            onClick={toggleGroupBy}>
+                            {groupBy === "firstLetter" ? "Agrupado" : "Agrupar"}
+                        </button>
+                        <button
+                            className="btn btn-outline mx-2"
+                            onClick={toggleSortBy}>
+                            {sortBy === "none" ? "Ordenar por: Ninguno" : sortBy === "name" ? "Ordenar por: Nombre" : "Ordenar por: Genero"}
+                        </button>
+                        <button
+                            className="btn btn-outline"
+                            onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
+                            {sortOrder === "asc" ? "Ascendente" : "Descendente"}
+                        </button>
+                    </div>
+                    <div className="container mx-11">
+                        {groupBy === "firstLetter" ? (
+                            (narratorsToDisplay() as [string, Narrator[]][]).map(([key, narrators]) => (
+                                <div key={key}>
+                                    <h4 className="text-lg font-bold">{key}</h4>
+                                    <div className="grid grid-cols-4 gap-4">
+                                        {narrators.map((item: Narrator) => (
+                                            <Card key={item.id} {...item} />
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
                             <div className="grid grid-cols-4 gap-4">
-                                {(searchResults.length > 0 ? searchResults : data.responseElements).map((item: Narrator) => (
-                                    <Card
-                                        key={item.id}
-                                        id={item.id}
-                                        name={item.name}
-                                        lastName={item.lastName}
-                                        genre={item.genre}
-                                    />
+                                {(narratorsToDisplay() as Narrator[]).map((item: Narrator) => (
+                                    <Card key={item.id} {...item} />
                                 ))}
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -108,15 +196,30 @@ export default function Narrators() {
     );
 }
 
-function Card({ id, name, lastName, genre }: Narrator) {
+function Card({ id, name, lastName, genre, profilePicture }: Narrator) {
+    const imageRef = useRef<HTMLImageElement | null>(null);
+
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <h4 className="card-title text-black font-bold"> {name} {lastName}
-                </h4>
-                <div className='my-4 text-stone-700'>
-                    <p>{genre}</p>
-                </div>
+                <a href={`/narrator/${id}`}>
+                    <h4 className="card-title text-black font-bold"> {name} {lastName}</h4>
+                </a>
+                <a href={`/narrator/${id}`}>
+                    <div className="my-1 mx-auto">
+                        <img
+                            ref={imageRef}
+                            src={profilePicture}
+                            alt={`${name} cover`}
+                            className="w-auto h-64 rounded-3xl"
+                        />
+                    </div>
+                </a>
+                <a href={`/narrator/${id}`}>
+                    <div className='my-4 text-stone-700'>
+                        <p>{genre}</p>
+                    </div>
+                </a>
                 <div className="card-actions justify-center">
                     <Link to={`/narrator/${id}`} className="btn btn-outline btn-accent w-3/5">
                         Más información

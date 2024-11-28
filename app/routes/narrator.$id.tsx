@@ -2,7 +2,7 @@ import { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useRef } from "react";
 
-import { getAudioBookById, getAudioBookByNarratorId } from "~/services/audioBookService";
+import { getAudioBookByNarratorId } from "~/services/audioBookService";
 import { getNarratorById } from "~/services/narratorService";
 import { Audiobook, Narrator } from "~/services/interfaces";
 
@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     const audioBookResponse = await getAudioBookByNarratorId(Number(id));
     return {
         narrator: narratorResponse.responseElements[0],
-        audioBooks: audioBookResponse.responseElements,
+        audiobooks: audioBookResponse.responseElements || [],
     }
 };
 
@@ -27,32 +27,35 @@ export default function NarratorDetail() {
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
+        <div className="items-center justify-center bg-slate-100 pt-28">
             <Navbar />
-            <div className="grid grid-cols-11 mx-20 my-10">
-                <div className="justify-center items-center col-start-1 col-end-6">
+            <div className="grid grid-cols-11 mx-20 my-10 min-h-screen">
+                <div className="justify-center items-center col-start-1 col-end-6 row-start-1">
                     <div>
                         <Link to="/narrators" className="btn btn-outline btn-accent">Volver Atras</Link>
                     </div>
-                    {narrator && (
-                        <>
-                            <h1 className="text-5xl text-slate-700 my-6">
-                                <strong>{narrator.name} {narrator.lastName}</strong>
-                            </h1>
-                            <div className="text-lg text-emerald-600 text-3xl mx-2">
-                                <p><strong className="text-slate-600 font-bold">Género:</strong> {narrator.genre}</p>
-                            </div>
-                        </>
-                    )}
-                </div>
-                <div className="justify-center items-center col-start-6 col-end-12 flex">
-                    {narrator && (
+                    <h1 className="text-3xl text-slate-700 my-6">
+                        <strong>{narrator.name} {narrator.lastName}</strong>
+                    </h1>
+                    <h2 className="text-xl text-slate-500 my-2">
+                        <strong className="text-slate-600 font-bold">Género:</strong> {narrator.genre}
+                    </h2>
+                    <div className="p-1 my-6 mr-10">
                         <img
+                            ref={imageRef}
                             src={narrator.profilePicture}
-                            alt={`${narrator.name} Cover`}
-                            className="w-auto h-screen rounded-3xl"
+                            alt={`${narrator.name} Image`}
+                            className="w-auto h-screen rounded-3xl z-10"
                         />
-                    )}
+                    </div>
+                </div>
+                <div className="justify-center items-center col-start-6 col-end-13 row-start-1">
+                    <h1 className="text-3xl text-slate-700 my-6">
+                        <strong>Bibliografia</strong>
+                    </h1>
+                    <p className="text-xl text-slate-500 text-justify">
+                        aca va la bibliografia de el narrador
+                    </p>
                 </div>
             </div>
             <div className="my-10">
@@ -72,6 +75,7 @@ export default function NarratorDetail() {
 
 function Card({ id, name, published, edition, frontPage }: Audiobook) {
     const imageRef = useRef<HTMLImageElement | null>(null);
+    const year = new Date(published).getFullYear();
 
     return (
         <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
@@ -86,7 +90,7 @@ function Card({ id, name, published, edition, frontPage }: Audiobook) {
                     />
                 </div>
                 <div className='my-4 text-stone-700'>
-                    <p><strong>Publicado:</strong> {published}</p>
+                    <p><strong>Publicado:</strong> {year}</p>
                     <p><strong>Edición:</strong> {edition}</p>
                 </div>
                 <div className="card-actions justify-center">

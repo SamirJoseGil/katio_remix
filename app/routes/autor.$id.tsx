@@ -10,7 +10,6 @@ import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 
 
-
 // Loader para obtener los detalles del autor
 export const loader: LoaderFunction = async ({ params }) => {
     const id = params.id;

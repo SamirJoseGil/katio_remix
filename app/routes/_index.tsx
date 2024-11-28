@@ -13,14 +13,14 @@ export default function Index() {
       <div className="">
         <div className="relative flex-1 h-screen">
           <div className="h-screen absolute inset-0 bg-cover bg-[url('/public/img/MainBackground.png')]">
-            <div className="absolute inset-0 backdrop-blur-m bg-black bg-opacity-50"></div>
+            <div className="absolute inset-0 backdrop-blur-m bg-black bg-opacity-30"></div>
           </div>
-          <div className="pt-20 relative z-10 animate__animated animate__fadeIn text-center">
+          <div className="pt-6 relative z-10 animate__animated animate__fadeIn text-center">
             <div className="mt-10 animate__animated animate__fadeInUp">
               <h3 className="text-5xl uppercase font-bold text-white">Biblioteca Virtual Secretos Para Contar</h3>
             </div>
             <div className="my-10 animate__animated animate__fadeInUp">
-              <Link to="#QuienEsKatio" className="btn btn-outline bg-custom-dark-blue text-2xl mr-10">Quien es Katio?</Link>
+              <Link to="#QuienEsKatio" className="btn btn-active btn-ghost text-2xl text-white mr-10">Quien es Katio?</Link>
             </div>
           </div>
         </div>

@@ -12,6 +12,22 @@ body {
 }
 
 @layer utilities {
+  /* Orange */
+  .bg-custom-Orange {
+    background-color: #FA4616;
+  }
+  .text-custom-Orange {
+    color: #FA4616;
+  }
+
+  /* white */
+  .bg-custom-white {
+    background-color: #FFFFFF;
+  }
+  .text-custom-white {
+    color: #FFFFFF;
+  }
+
   /* Beige */
   .bg-custom-beige {
     background-color: #ecead3;

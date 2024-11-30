@@ -20,7 +20,7 @@ export default function Index() {
               <h3 className="text-5xl uppercase font-bold text-white">Biblioteca Virtual Secretos Para Contar</h3>
             </div>
             <div className="my-10 animate__animated animate__fadeInUp">
-              <Link to="#QuienEsKatio" className="btn btn-active btn-ghost text-2xl text-white mr-10">Quien es Katio?</Link>
+              <Link to="#QuienEsKatio" className="btn btn-active btn-ghost text-2xl text-white mr-10">Quién es Katio?</Link>
             </div>
           </div>
         </div>

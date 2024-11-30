@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function AudioBookDetail() {
     const audioBook = useLoaderData<Audiobook>();
     const imageRef = useRef<HTMLImageElement | null>(null);
-
+    const audioBookName = audioBook.name;
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <Navbar />
@@ -36,6 +36,7 @@ export default function AudioBookDetail() {
                                     <strong>{audioBook.name}</strong>
                                 </h1>
                                 <div className="text-lg text-emerald-600 text-3xl mx-2">
+                                    {/*<p><strong className="text-slate-600 font-bold">Narrador:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/narrator/${audioBook.narratorId}`}>{audioBook.narrator.name} {audioBook.narrator.lastName} </a></p>*/}
                                     <p><strong className="text-slate-600 font-bold">ISBN:</strong> {audioBook.isbN10}</p>
                                     <p><strong className="text-slate-600 font-bold">ISBN-13:</strong> {audioBook.isbN13}</p>
                                     <p><strong className="text-slate-600 font-bold">Publicacion:</strong> {audioBook.published}</p>

@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
+import { useNavigate } from "@remix-run/react";
 
 interface FormData {
     name: string;
@@ -21,6 +22,7 @@ export default function CreateNarrator() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [narratorCoverBase64, setNarratorCoverBase64] = useState("");
+    const navigate = useNavigate(); 
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -61,8 +63,9 @@ export default function CreateNarrator() {
                 setIsModalOpen(true);
                 return;
             }
-
             alert("Narrador creado exitosamente");
+            navigate("/narrators");
+
             setFormData({
                 name: "",
                 lastName: "",

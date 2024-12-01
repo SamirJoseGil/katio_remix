@@ -197,7 +197,7 @@ export default function Books() {
     );
 }
 
-function Card({ id, name, published, edition, bookCover }: Book) {
+function Card({ id, name, published, edition, bookCover, author }: Book) {
     const imageRef = useRef<HTMLImageElement | null>(null);
     const year = new Date(published).getFullYear();
 
@@ -207,19 +207,19 @@ function Card({ id, name, published, edition, bookCover }: Book) {
                 <a href={`/book/${id}`}>
                     <h4 className="card-title text-black font-bold">{name}</h4>
                 </a>
-                <a href={`/book/${id}`}>
-                    <div className="my-4 mx-auto">
+                <div className="my-1 mx-auto">
+                    <a href={`/book/${id}`}>
                         <img
                             ref={imageRef}
                             src={bookCover}
                             alt={`${name} cover`}
                             className="w-auto h-64 rounded-3xl"
                         />
-                    </div>
-                </a>
+                    </a>
+                </div>
                 <a href={`/book/${id}`}>
                     <div className="my-4 text-stone-700">
-                        <p>{edition}</p>
+                        <p>{author.name} {author.lastName}</p>
                         <p>{year}</p>
                     </div>
                 </a>

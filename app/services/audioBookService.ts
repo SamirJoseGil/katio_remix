@@ -44,3 +44,14 @@ export async function getAudioBookByNarratorId(id: number) {
     const audioBook = await response.json();
     return audioBook;
 }
+
+
+export async function getAudioBookFileById(id: number) {
+    const response = await fetch(`http://localhost:5125/api/AudioBook/GetAudioBookFile?id=${id}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch audiobook file');
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    return { url, type: response.headers.get('Content-Type') };
+}

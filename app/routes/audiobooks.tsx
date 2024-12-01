@@ -198,7 +198,7 @@ export default function AudioBooks() {
     );
 }
 
-function Card({ id, name, published, edition, frontPage }: Audiobook) {
+function Card({ id, name, published, frontPage, narrator }: Audiobook) {
     const imageRef = useRef<HTMLImageElement | null>(null);
     const year = new Date(published).getFullYear();
 
@@ -220,8 +220,8 @@ function Card({ id, name, published, edition, frontPage }: Audiobook) {
                 </a>
                 <a href={`/audiobook/${id}`}>
                     <div className='my-4 text-stone-700'>
-                        <p><strong>Publicado:</strong> {year}</p>
-                        <p><strong>Edición:</strong> {edition}</p>
+                        <p>{narrator.name} {narrator.lastName}</p>
+                        <p>{year}</p>
                     </div>
                 </a>
                 <div className="card-actions justify-center">

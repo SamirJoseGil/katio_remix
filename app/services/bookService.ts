@@ -58,3 +58,13 @@ export async function getByAuthorId(id: number) {
     const book = await response.json();
     return book;
 }
+
+export async function getBookPdfById(id: number) {
+    const response = await fetch(`http://localhost:5125/api/Book/GetBookPdf?id=${id}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch book with PDF');
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    return url;
+}

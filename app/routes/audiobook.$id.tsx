@@ -1,7 +1,7 @@
 import { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { getAudioBookById } from "~/services/audioBookService";
+import { getAudioBookById, getAudioBookFileById } from "~/services/audioBookService";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 
@@ -20,7 +20,37 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function AudioBookDetail() {
     const audioBook = useLoaderData<Audiobook>();
     const imageRef = useRef<HTMLImageElement | null>(null);
-    const audioBookName = audioBook.name;
+
+    const [mediaUrl, setMediaUrl] = useState<string>('');
+    const [mediaType, setMediaType] = useState<string>('');
+
+    const fetchAudioBookFile = async () => {
+        try {
+            const { url, type } = await getAudioBookFileById(audioBook.id);
+            setMediaUrl(url);
+            setMediaType(type || '');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+    const downloadAudioBookFile = async () => {
+        try {
+            const { url, type } = await getAudioBookFileById(audioBook.id);
+            const extension = type?.split('/')[1] || 'mp3'; // Proporcionar un valor predeterminado
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${audioBook.name}.${extension}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
     return (
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <Navbar />
@@ -36,7 +66,7 @@ export default function AudioBookDetail() {
                                     <strong>{audioBook.name}</strong>
                                 </h1>
                                 <div className="text-lg text-emerald-600 text-3xl mx-2">
-                                    {/*<p><strong className="text-slate-600 font-bold">Narrador:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/narrator/${audioBook.narratorId}`}>{audioBook.narrator.name} {audioBook.narrator.lastName} </a></p>*/}
+                                    <p><strong className="text-slate-600 font-bold">Narrador:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/narrator/${audioBook.narratorId}`}>{audioBook.narrator.name} {audioBook.narrator.lastName} </a></p>
                                     <p><strong className="text-slate-600 font-bold">ISBN:</strong> {audioBook.isbN10}</p>
                                     <p><strong className="text-slate-600 font-bold">ISBN-13:</strong> {audioBook.isbN13}</p>
                                     <p><strong className="text-slate-600 font-bold">Publicacion:</strong> {audioBook.published}</p>
@@ -67,8 +97,22 @@ export default function AudioBookDetail() {
                         )}
                     </div>
                 </div>
-                <div className="">
-                    <h1>Aca va el libro en audiolibro</h1>
+                <div className="text-center my-10">
+                    <button onClick={fetchAudioBookFile} className="btn btn-outline btn-accent mt-4 mx-4">
+                        Escuchar Audiolibro
+                    </button>
+                    <button onClick={downloadAudioBookFile} className="btn btn-outline btn-accent mt-4">
+                        Descargar Audiolibro
+                    </button>
+                    {mediaUrl && (
+                        <div className="mt-4 flex justify-center">
+                            {mediaType.startsWith('audio') ? (
+                                <audio controls src={mediaUrl} className="w-1/5 my-10" />
+                            ) : (
+                                <video controls src={mediaUrl} className="w-full my-10" />
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer />

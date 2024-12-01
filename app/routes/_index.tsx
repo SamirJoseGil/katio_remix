@@ -40,12 +40,6 @@ export default function Index() {
           <Link to="/books" className="btn btn-outline bg-custom-dark-blue text-2xl">Ir a la Biblioteca</Link>
         </div>
       </div>
-      <div className="min-h-screen bg-white">
-        <div className="mt-20 text-center">
-          <h2 className="text-4xl font-bold text-custom-dark-blue mb-4">Lo más leido:</h2>
-          Aqui van los más descargados cuando se implementen las estadisticas.
-        </div>
-      </div>
       <Footer />
     </div>
   );

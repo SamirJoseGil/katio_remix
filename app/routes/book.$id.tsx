@@ -33,16 +33,14 @@ export default function BookDetail() {
                                     <strong>{book.name}</strong>
                                 </h1>
                                 <div className="text-lg text-emerald-600 text-3xl mx-2">
+                                    <p><strong className="text-slate-600 font-bold">Autor:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/autor/${book.authorId}`}>{book.author.name} {book.author.lastName} </a></p>
+                                    <h2 className="text-3xl text-slate-700 mt-10 mb-5"><strong>Información general</strong></h2>
                                     <p><strong className="text-slate-600 font-bold">ISBN:</strong> {book.isbN10}</p>
                                     <p><strong className="text-slate-600 font-bold">ISBN-13:</strong> {book.isbN13}</p>
                                     <p><strong className="text-slate-600 font-bold">Publicacion:</strong> {book.published}</p>
                                     <p><strong className="text-slate-600 font-bold">Edicion:</strong> {book.edition}</p>
                                     {book.author && (
                                         <div className="my-6">
-                                            <h2 className="text-4xl text-slate-700 mt-10 mb-5"><strong>Información del Autor</strong></h2>
-                                            <p><strong className="text-slate-600 font-bold">Nombre:</strong> {book.author.name} {book.author.lastName}</p>
-                                            <p><strong className="text-slate-600 font-bold">País:</strong> {book.author.country}</p>
-                                            <p><strong className="text-slate-600 font-bold">Fecha de Nacimiento:</strong> {book.author.birthDate}</p>
                                             <Link to={`/autor/${book.authorId}`} className="btn btn-outline btn-accent w-2/5 my-2">
                                                 Más información
                                             </Link>

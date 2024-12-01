@@ -157,8 +157,10 @@ export default function CreateAuthor() {
                             )}
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
-                        Crear Autor
+                    <button className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
+                            <a href="/autors" >
+                                Crear Autor
+                            </a>
                     </button>
                 </form>
                 {isModalOpen && (

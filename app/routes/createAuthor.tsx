@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import { ImageToBase64 } from "~/components/Base64Util";
@@ -11,7 +12,6 @@ interface FormData {
     profilePicture: string;
     biography: string;
 }
-
 
 export default function CreateAuthor() {
     const [formData, setFormData] = useState<FormData>({
@@ -26,6 +26,8 @@ export default function CreateAuthor() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [authorCoverBase64, setAuthorCoverBase64] = useState("");
+
+    const navigate = useNavigate(); // Hook para navegación programática
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -70,14 +72,10 @@ export default function CreateAuthor() {
             }
 
             alert("Author creado exitosamente");
-            setFormData({
-                name: "",
-                lastName: "",
-                country: "",
-                birthDate: "",
-                profilePicture: "",
-                biography: "",
-            });
+
+            // Redirigir a /autors después de la creación exitosa
+            navigate("/autors");
+
         } catch (error) {
             console.error("Error de conexión:", error);
             setErrorMessage("Error inesperado al conectar con el servidor.");
@@ -146,7 +144,6 @@ export default function CreateAuthor() {
                                 required
                                 rows={5}
                             />
-
                         </div>
                         <div className="flex flex-col items-center">
                             <ImageToBase64 onBase64Generated={handleBase64Generated} />
@@ -157,10 +154,8 @@ export default function CreateAuthor() {
                             )}
                         </div>
                     </div>
-                    <button className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
-                            <a href="/autors" >
-                                Crear Autor
-                            </a>
+                    <button type="submit" className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
+                        Crear Autor
                     </button>
                 </form>
                 {isModalOpen && (
@@ -175,6 +170,7 @@ export default function CreateAuthor() {
         </div>
     );
 }
+
 
 function Modal({ isOpen, onClose, errorMessage }: { isOpen: boolean, onClose: () => void, errorMessage: string | null }) {
     if (!isOpen) return null;

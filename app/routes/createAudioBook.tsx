@@ -4,6 +4,7 @@ import { ImageToBase64 } from "~/components/Base64Util";
 
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
+import { useNavigate } from "@remix-run/react";
 
 interface FormData {
     name: string;
@@ -37,6 +38,8 @@ export default function CreateAudiobook() {
     const [frontPageBase64, setFrontPageBase64] = useState("");
     const [selectedAudioName, setSelectedAudioName] = useState("");
     const [audioDuration, setAudioDuration] = useState<string>("");
+
+    const navigate = useNavigate(); 
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -87,6 +90,9 @@ export default function CreateAudiobook() {
             }
 
             alert("Audiolibro creado exitosamente");
+
+            navigate("/audiobooks");
+
             setFormData({
                 name: "",
                 isbn10: "",

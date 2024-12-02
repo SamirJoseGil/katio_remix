@@ -4,6 +4,7 @@ import { ImageToBase64 } from "~/components/Base64Util";
 
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
+import { useNavigate } from "@remix-run/react";
 
 interface FormData {
     name: string;
@@ -34,6 +35,8 @@ export default function CreateBook() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [bookCoverBase64, setBookCoverBase64] = useState("");
     const [selectedPdfName, setSelectedPdfName] = useState('');
+
+    const navigate = useNavigate(); 
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value, files } = event.target;
@@ -73,6 +76,7 @@ export default function CreateBook() {
             }
 
             alert("Libro creado exitosamente");
+            navigate("/books");
             setFormData({
                 name: "",
                 isbn10: "",

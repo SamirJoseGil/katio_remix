@@ -34,13 +34,13 @@ export default function AuthorDetail() {
                     <div>
                         <Link to="/autors" className="btn btn-outline btn-accent">Volver Atras</Link>
                     </div>
-                    <h1 className="text-3xl text-slate-700 my-6">
+                    <h1 className="text-5xl text-slate-800 my-6">
                         <strong>{author.name} {author.lastName}</strong>
                     </h1>
-                    <h2 className="text-xl text-slate-500 my-2">
+                    <h2 className="text-slate-700 font-bold">
                         <strong>Fecha de Nacimiento:</strong> {author.birthDate}
                     </h2>
-                    <h2 className="text-xl text-slate-500">
+                    <h2 className="text-slate-700 font-bold">
                         <strong>País:</strong> {author.country}
                     </h2>
                     <div className="p-1 my-6 mr-10">
@@ -53,7 +53,7 @@ export default function AuthorDetail() {
                     </div>
                 </div>
                 <div className="justify-center items-center col-start-6 col-end-13 row-start-1">
-                    <h1 className="text-3xl text-slate-700 my-6">
+                    <h1 className="text-3xl text-slate-800 mt-10 mb-5">
                         <strong>Bibliografia</strong>
                     </h1>
                     <p className="text-xl text-slate-500 text-justify">
@@ -62,7 +62,7 @@ export default function AuthorDetail() {
                 </div>
             </div>
             <div className="my-10">
-                <h1 className="text-4xl text-slate-700 my-6 text-center"><strong>Libros del autor</strong></h1>
+                <h1 className="text-3xl text-slate-800 mt-10 mb-5 text-center"><strong>Libros del autor</strong></h1>
                 <div className="container mx-11">
                     <div className="grid grid-cols-4 gap-4">
                         {books.map((item: Book) => (

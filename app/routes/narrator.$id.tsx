@@ -34,11 +34,11 @@ export default function NarratorDetail() {
                     <div>
                         <Link to="/narrators" className="btn btn-outline btn-accent">Volver Atras</Link>
                     </div>
-                    <h1 className="text-3xl text-slate-700 my-6">
+                    <h1 className="text-5xl text-slate-800 my-6">
                         <strong>{narrator.name} {narrator.lastName}</strong>
                     </h1>
-                    <h2 className="text-xl text-slate-500 my-2">
-                        <strong className="text-slate-600 font-bold">Género:</strong> {narrator.genre}
+                    <h2 className="text-lg text-slate-500 font-bold text-3xl mx-2">
+                        <strong className="text-slate-700 font-bold">Género:</strong> {narrator.genre}
                     </h2>
                     <div className="p-1 my-6 mr-10">
                         <img
@@ -50,7 +50,7 @@ export default function NarratorDetail() {
                     </div>
                 </div>
                 <div className="justify-center items-center col-start-6 col-end-13 row-start-1">
-                    <h1 className="text-3xl text-slate-700 my-6">
+                    <h1 className="text-3xl text-slate-800 mt-10 mb-5">
                         <strong>Bibliografia</strong>
                     </h1>
                     <p className="text-xl text-slate-500 text-justify">

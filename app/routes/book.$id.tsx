@@ -70,7 +70,7 @@ export default function BookDetail() {
                                             </Link>
                                         </div>
                                     )}
-                                    <p><strong className="text-4xl text-slate-700 font-bold">Descripcion de el libro</strong></p>
+                                    <p><strong className="text-3xl text-slate-800 mt-10 mb-5">Descripcion del libro</strong></p>
                                     <p>aca va la descripcion</p>
                                 </div>
                             </>

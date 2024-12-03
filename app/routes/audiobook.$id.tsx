@@ -67,21 +67,13 @@ export default function AudioBookDetail() {
                                 </h1>
                                 <div className="text-lg text-slate-500 font-bold text-3xl mx-2">
                                     <p><strong className="text-slate-700 font-bold">Narrador:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/narrator/${audioBook.narratorId}`}>{audioBook.narrator.name} {audioBook.narrator.lastName} </a></p>
+                                    <h2 className="text-3xl text-slate-800 mt-10 mb-5"><strong>Información general</strong></h2>
                                     <p><strong className="text-slate-700 font-bold">ISBN:</strong> {audioBook.isbN10}</p>
                                     <p><strong className="text-slate-700 font-bold">ISBN-13:</strong> {audioBook.isbN13}</p>
                                     <p><strong className="text-slate-700 font-bold">Publicacion:</strong> {audioBook.published}</p>
                                     <p><strong className="text-slate-700 font-bold">Edicion:</strong> {audioBook.edition}</p>
                                     <p><strong className="text-slate-700 font-bold">Genero:</strong> {audioBook.genre}</p>
                                     <p><strong className="text-slate-700 font-bold">Duracion en segundos:</strong> {audioBook.lenghtInSeconds}</p>
-                                    {audioBook.narrator && (
-                                        <div className="my-6">
-                                            <h2 className="text-3xl text-slate-800 mt-10 mb-5"><strong>Información del narrador</strong></h2>
-                                            <p><strong className="text-slate-700 font-bold">Nombre:</strong> {audioBook.narrator.name} {audioBook.narrator.lastName}</p>
-                                            <Link to={`/narrator/${audioBook.narratorId}`} className="btn btn-outline btn-accent w-2/5 my-2">
-                                                Más información
-                                            </Link>
-                                        </div>
-                                    )}
                                 </div>
                             </>
                         )}

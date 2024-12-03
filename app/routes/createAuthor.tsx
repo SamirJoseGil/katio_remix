@@ -91,46 +91,46 @@ export default function CreateAuthor() {
                     <h2 className="text-2xl font-bold my-8 text-slate-700">Crear Author</h2>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-3">
-                            <label className="input rounded-3xl flex items-center gap-2 w-5/5 mx-auto focus:outline-none bg-white border border-neutral-600">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="Nombre"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl flex items-center gap-2 w-5/5 mx-auto focus:outline-none bg-white border border-neutral-600">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="Apellido"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl flex items-center gap-2 w-5/5 mx-auto focus:outline-none bg-white border border-neutral-600">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="country"
                                     value={formData.country}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="País"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl flex items-center gap-2 w-5/5 mx-auto focus:outline-none bg-white border border-neutral-600">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="date"
                                     name="birthDate"
                                     value={formData.birthDate}
                                     onChange={handleInputChange}
-                                    className="grow text-neutral-400"
+                                    className="grow px-3 py-2 text-slate-400 date-input"
                                     placeholder="Fecha de Nacimiento"
                                     required
                                 />

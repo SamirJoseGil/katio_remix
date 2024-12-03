@@ -77,6 +77,10 @@ body {
   }
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 textarea {
   word-wrap: break-word;
   overflow-wrap: break-word;

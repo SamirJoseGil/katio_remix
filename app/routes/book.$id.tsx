@@ -71,7 +71,7 @@ export default function BookDetail() {
                                         </div>
                                     )}
                                     <p><strong className="text-3xl text-slate-800 mt-10 mb-5">Descripcion del libro</strong></p>
-                                    <p>aca va la descripcion</p>
+                                    <p>{book.description}</p>
                                 </div>
                             </>
                         )}

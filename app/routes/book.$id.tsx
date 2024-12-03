@@ -63,14 +63,7 @@ export default function BookDetail() {
                                     <p><strong className="text-slate-700 font-bold">ISBN-13:</strong> {book.isbN13}</p>
                                     <p><strong className="text-slate-700 font-bold">Publicacion:</strong> {book.published}</p>
                                     <p><strong className="text-slate-700 font-bold">Edicion:</strong> {book.edition}</p>
-                                    {book.author && (
-                                        <div className="my-6">
-                                            <Link to={`/autor/${book.authorId}`} className="btn btn-outline btn-accent w-2/5 my-2">
-                                                Más información
-                                            </Link>
-                                        </div>
-                                    )}
-                                    <p><strong className="text-3xl text-slate-800 mt-10 mb-5">Descripcion del libro</strong></p>
+                                    <h2 className="text-3xl text-slate-800 mt-10 mb-5"><strong>Descripcion del libro</strong></h2>
                                     <p>aca va la descripcion</p>
                                 </div>
                             </>

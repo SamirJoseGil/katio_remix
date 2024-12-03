@@ -5,6 +5,8 @@ import { ImageToBase64 } from "~/components/Base64Util";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import { useNavigate } from "@remix-run/react";
+import { Data, Narrator } from "~/services/interfaces";
+import { search } from "~/services/narratorService";
 
 interface FormData {
     name: string;
@@ -15,7 +17,7 @@ interface FormData {
     genre: string;
     lenghtInSeconds: string;
     frontPage: string;
-    narratorId: string;
+    narratorId: number;
     audioFile: File | null;
 }
 
@@ -29,7 +31,7 @@ export default function CreateAudiobook() {
         genre: "",
         lenghtInSeconds: "",
         frontPage: "",
-        narratorId: "",
+        narratorId: 0,
         audioFile: null,
     })
 
@@ -38,6 +40,9 @@ export default function CreateAudiobook() {
     const [frontPageBase64, setFrontPageBase64] = useState("");
     const [selectedAudioName, setSelectedAudioName] = useState("");
     const [audioDuration, setAudioDuration] = useState<string>("");
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [narrators, setNarrators] = useState<Narrator[]>([]);
+    const [selectedNarrator, setSelectedNarrator] = useState<Narrator | null>(null);
 
     const navigate = useNavigate(); 
 
@@ -54,27 +59,14 @@ export default function CreateAudiobook() {
         setFormData({ ...formData, frontPage: base64 });
     };
 
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         const formDataToSend = new FormData();
-        formDataToSend.append("name", formData.name);
-        formDataToSend.append("isbn10", formData.isbn10);
-        formDataToSend.append("isbn13", formData.isbn13);
-        formDataToSend.append("published", formData.published);
-        formDataToSend.append("edition", formData.edition);
-        formDataToSend.append("genre", formData.genre);
-        formDataToSend.append("lengthInSeconds", formData.lenghtInSeconds);
-        formDataToSend.append("frontPage", formData.frontPage);
-        formDataToSend.append("narratorId", formData.narratorId);
-
-        if (formData.audioFile) {
-            formDataToSend.append("AudioFile", formData.audioFile); // Asegúrate de usar "AudioFile" con "A" mayúscula
-        } else {
-            setErrorMessage("El archivo de audio es requerido.");
-            setIsModalOpen(true);
-            return;
-        }
+        
+        Object.entries(formData).forEach(([key, value]) => {
+            if (key === "audioFile") return;
+            formDataToSend.append(key, value);
+        });
 
         try {
             const response = await fetch("http://localhost:5125/api/Audiobook/CreateAudiobook", {
@@ -102,7 +94,7 @@ export default function CreateAudiobook() {
                 genre: "",
                 lenghtInSeconds: "",
                 frontPage: "",
-                narratorId: "",
+                narratorId: 0,
                 audioFile: null,
             });
         } catch (error) {
@@ -131,6 +123,30 @@ export default function CreateAudiobook() {
         }
     };
 
+    const handleSearchChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        const term = event.target.value;
+        setSearchTerm(term);
+
+        if (term) {
+            try {
+                const results: Data<Narrator> = await search(term);
+                setNarrators(results.responseElements);
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            setNarrators([]);
+        }
+    };
+
+    const handleNarratorSelect = (narrator: Narrator) => {
+        setSelectedNarrator(narrator);
+        setFormData({ ...formData, narratorId: narrator.id });
+        setSearchTerm(`${narrator.name} ${narrator.lastName}`);
+        setNarrators([]);
+    }
+
+
     return (
         <div className="bg-slate-100 pt-28">
             <Navbar />
@@ -139,85 +155,113 @@ export default function CreateAudiobook() {
                     <h2 className="text-2xl font-bold mb-4 text-slate-700">Crear Audiolibro</h2>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-3">
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="Nombre"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="isbn10"
                                     value={formData.isbn10}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="ISBN"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="isbn13"
                                     value={formData.isbn13}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="ISBN13"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="date"
                                     name="published"
                                     value={formData.published}
                                     onChange={handleInputChange}
-                                    className="grow text-neutral-400"
+                                    className="grow px-3 py-2 text-slate-400 date-input"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="edition"
                                     value={formData.edition}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="Edición"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="genre"
                                     value={formData.genre}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="Género"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 <input
                                     type="text"
                                     name="narratorId"
                                     value={formData.narratorId}
                                     onChange={handleInputChange}
-                                    className="grow"
+                                    className="grow px-3 py-2"
                                     placeholder="ID del Autor"
                                     required
                                 />
                             </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center">
+                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                 Duración del audiolibro  {audioDuration} segundos
                             </label>
+                            <div className="mb-4">
+                                <label htmlFor="narrator" className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
+                                    <input
+                                        type="text"
+                                        id="narrator"
+                                        value={searchTerm}
+                                        onChange={handleSearchChange}
+                                        className="grow px-3 py-2"
+                                        placeholder="Nombre del narrador"
+                                    />
+                                </label>
+                                {narrators.length > 0 && (
+                                    <div className="border border-neutral-600 rounded-3xl mt-2 max-h-64 overflow-y-auto">
+                                        <ul className="divide-y divide-gray-300">
+                                            {narrators.map((narrator) => (
+                                                <li
+                                                    key={narrator.id}
+                                                    onClick={() => handleNarratorSelect(narrator)}
+                                                    className="px-3 py-2 cursor-pointer hover:bg-gray-400"
+                                                ><div className="flex">
+                                                        <h1 className="mx-auto">{narrator.name} {narrator.lastName}</h1>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div>
                             <label className="rounded-3xl w-full bg-white flex items-center">

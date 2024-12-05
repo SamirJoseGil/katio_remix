@@ -104,7 +104,7 @@ export default function AudioBooks() {
         <div className="items-center justify-center bg-slate-100 pt-28">
             <NavBar />
             <div className='my-10 bg-slate-100'>
-                <h1 className="text-5xl text-center my-2"><strong>sección de Audiolibros</strong></h1>
+                <h1 className="text-5xl text-center my-2"><strong>Sección de Audiolibros</strong></h1>
                 <div className="navbar border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>

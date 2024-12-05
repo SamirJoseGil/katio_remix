@@ -62,19 +62,17 @@ export default function CreateAuthor() {
                 },
                 body: JSON.stringify(authorData),
             });
-
             const responseText = await response.text();
-
             if (!response.ok) {
                 setErrorMessage(`Error al crear el author: ${responseText}`);
                 setIsModalOpen(true);
                 return;
             }
-
+            const responseData = JSON.parse(responseText);
+            const createdAutor = responseData.responseElements[0];
+            const autorId = createdAutor.id;
             alert("Author creado exitosamente");
-
-            // Redirigir a /autors después de la creación exitosa
-            navigate("/autors");
+            navigate(`/autor/${autorId}`);
 
         } catch (error) {
             console.error("Error de conexión:", error);

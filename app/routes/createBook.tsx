@@ -18,6 +18,7 @@ interface FormData {
     authorId: number;
     pdfFile: File | null;
     bookCover: string;
+    description: string;
 }
 
 export default function CreateBook() {
@@ -31,6 +32,7 @@ export default function CreateBook() {
         authorId: 0,
         pdfFile: null,
         bookCover: "",
+        description: "",
     });
 
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -43,10 +45,10 @@ export default function CreateBook() {
 
     const navigate = useNavigate();
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value, files } = event.target;
-        if (name === "pdfFile" && files) {
-            setFormData({ ...formData, [name]: files[0] });
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        if (name === "pdfFile" && event.target instanceof HTMLInputElement && event.target.files) {
+            setFormData({ ...formData, [name]: event.target.files[0] });
         } else {
             setFormData({ ...formData, [name]: value });
         }
@@ -67,21 +69,27 @@ export default function CreateBook() {
             }
         });
 
+        for (let pair of formDataToSend.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
         try {
             const response = await fetch("http://localhost:5125/api/Book/CreateBook", {
                 method: "POST",
                 body: formDataToSend,
             });
-
+            const responseText = await response.text();
             if (!response.ok) {
-                const responseText = await response.text();
                 setErrorMessage(`Error al crear el libro: ${responseText}`);
                 setIsModalOpen(true);
                 return;
             }
-
+            const responseData = JSON.parse(responseText);
+            const createdBook = responseData.responseElements[0];
+            const bookId = createdBook.id;
+            
             alert("Libro creado exitosamente");
-            navigate("/books");
+            navigate(`/book/${bookId}`);
             setFormData({
                 name: "",
                 isbn10: "",
@@ -92,6 +100,7 @@ export default function CreateBook() {
                 authorId: 0,
                 pdfFile: null,
                 bookCover: "",
+                description: "",
             });
         } catch (error) {
             setErrorMessage("Error inesperado al conectar con el servidor.");
@@ -99,11 +108,11 @@ export default function CreateBook() {
         }
     };
 
-    const handlePdfChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
+    const handlePdfChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
         if (file) {
             setSelectedPdfName(file.name);
-            handleInputChange(event);
+            handleInputChange(e);
         }
     };
 
@@ -203,6 +212,17 @@ export default function CreateBook() {
                                     required
                                 />
                             </label>
+                            <textarea
+                                name="description"
+                                value={formData.description}
+                                onChange={handleInputChange}
+                                className="text-neutral-700 bg-white rounded-3xl w-full h-60 border border-neutral-600 resize-none p-4 placeholder-gray-400 focus:outline-none"
+                                placeholder="Descripción"
+                                required
+                                rows={5}
+                            />
+                        </div>
+                        <div>
                             <div className="mb-4">
                                 <label htmlFor="author" className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
                                     <input
@@ -231,8 +251,6 @@ export default function CreateBook() {
                                     </div>
                                 )}
                             </div>
-                        </div>
-                        <div>
                             <label className="rounded-3xl w-full bg-white flex items-center">
                                 <input
                                     type="file"

@@ -113,7 +113,7 @@ export default function Autors() {
                         <a href="/autors" className="btn btn-ghost text-xl">Autores</a>
                     </div>
                     <div className="flex-none gap-2 mx-10">
-                        <div className="w-full">
+                        <div className="relative w-full">
                             <input
                                 type="text"
                                 placeholder="Buscar un autor"

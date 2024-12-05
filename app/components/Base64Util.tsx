@@ -17,7 +17,7 @@ function ImageToBase64({ onBase64Generated }: { onBase64Generated: (base64: stri
 
   return (
       <div className="flex flex-col items-center">
-          <label className="btn btn-outline btn-accent cursor-pointer">
+          <label className="btn btn-outline custom-button-orange cursor-pointer">
               Subir Portada
               <input type="file" onChange={handleImageUpload} className="hidden" />
           </label>

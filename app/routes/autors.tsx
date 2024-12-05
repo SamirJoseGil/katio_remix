@@ -155,17 +155,17 @@ export default function Autors() {
                     </h3>
                     <div className="flex my-5 mx-10">
                         <button
-                            className={`btn btn-outline ${groupBy === "firstLetter" ? "bg-gray-700 text-white" : "bg-slate-100"}`}
+                            className={`btn btn-outline ${groupBy === "firstLetter" ? "bg-gray-700 text-white" : "custom-button-blue"}`}
                             onClick={toggleGroupBy}>
                             {groupBy === "firstLetter" ? "Agrupado" : "Agrupar"}
                         </button>
                         <button
-                            className="btn btn-outline mx-2"
+                            className="btn btn-outline custom-button-blue mx-2"
                             onClick={toggleSortBy}>
                             {sortBy === "none" ? "Ordenar por: Ninguno" : sortBy === "name" ? "Ordenar por: Nombre" : "Ordenar por: Año"}
                         </button>
                         <button
-                            className="btn btn-outline"
+                            className="btn custom-button-blue btn-outline"
                             onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
                             {sortOrder === "asc" ? "Ascendente" : "Descendente"}
                         </button>
@@ -223,7 +223,7 @@ function Card({ id, name, lastName, country, birthDate, profilePicture }: Author
                     </div>
                 </a>
                 <div className="card-actions justify-center">
-                    <Link to={`/autor/${id}`} className="btn btn-outline btn-accent w-3/5">
+                    <Link to={`/autor/${id}`} className="btn btn-outline custom-button-orange w-3/5">
                         Más información
                     </Link>
                 </div>

@@ -49,7 +49,7 @@ export default function BookDetail() {
                 <div className="grid grid-cols-11 mx-20 my-10">
                     <div className="justify-center items-center col-start-1 col-end-6">
                         <div>
-                            <Link to="/books" className="btn btn-outline btn-accent">Volver Atras</Link>
+                            <Link to="/books" className="btn btn-outline custom-button-blue">Volver Atras</Link>
                         </div>
                         {book && (
                             <>
@@ -57,20 +57,13 @@ export default function BookDetail() {
                                     <strong>{book.name}</strong>
                                 </h1>
                                 <div className="text-lg text-slate-500 font-bold text-3xl mx-2">
-                                    <p><strong className="text-slate-700 font-bold">Autor:</strong> <a className="hover:decoration-1no-underline hover:underline ..." href={`/autor/${book.authorId}`}>{book.author.name} {book.author.lastName} </a></p>
+                                    <p><strong className="text-slate-700 font-bold">Autor:</strong> <a className="text-custom-Orange hover:decoration-1no-underline hover:underline ..." href={`/autor/${book.authorId}`}>{book.author.name} {book.author.lastName} </a></p>
                                     <h2 className="text-3xl text-slate-800 mt-10 mb-5"><strong>Información general</strong></h2>
                                     <p><strong className="text-slate-700 font-bold">ISBN:</strong> {book.isbN10}</p>
                                     <p><strong className="text-slate-700 font-bold">ISBN-13:</strong> {book.isbN13}</p>
                                     <p><strong className="text-slate-700 font-bold">Publicacion:</strong> {book.published}</p>
                                     <p><strong className="text-slate-700 font-bold">Edicion:</strong> {book.edition}</p>
-                                    {book.author && (
-                                        <div className="my-6">
-                                            <Link to={`/autor/${book.authorId}`} className="btn btn-outline btn-accent w-2/5 my-2">
-                                                Más información
-                                            </Link>
-                                        </div>
-                                    )}
-                                    <p><strong className="text-3xl text-slate-800 mt-10 mb-5">Descripcion del libro</strong></p>
+                                    <p><strong className="text-3xl text-slate-800 mt-64 mb-5">Descripcion del libro</strong></p>
                                     <p>{book.description}</p>
                                 </div>
                             </>
@@ -88,10 +81,10 @@ export default function BookDetail() {
                 </div>
             </div>
             <div className="text-center my-10">
-                <button onClick={fetchBookWithPdf} className="btn btn-outline btn-accent mt-4 mx-4">
+                <button onClick={fetchBookWithPdf} className="btn btn-outline custom-button-orange mt-4 mx-4">
                     Leer Libro
                 </button>
-                <button onClick={downloadBookPdf} className="btn btn-outline btn-accent mt-4">
+                <button onClick={downloadBookPdf} className="btn btn-outline custom-button-orange mt-4">
                     Descargar Libro
                 </button>
                 {pdfUrl && (

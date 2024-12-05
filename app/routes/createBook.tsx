@@ -255,7 +255,7 @@ export default function CreateBook() {
                             </div>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
+                    <button type="submit" className="btn btn-outline custom-button-orange rounded-3xl w-1/5 my-10">
                         Crear Libro
                     </button>
                 </form>

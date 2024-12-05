@@ -44,7 +44,7 @@ export default function CreateAudiobook() {
     const [narrators, setNarrators] = useState<Narrator[]>([]);
     const [selectedNarrator, setSelectedNarrator] = useState<Narrator | null>(null);
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -61,11 +61,15 @@ export default function CreateAudiobook() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         const formDataToSend = new FormData();
-        
+
         Object.entries(formData).forEach(([key, value]) => {
-            if (key === "audioFile") return;
-            formDataToSend.append(key, value);
+            if (key === "audioFile" && value instanceof File) {
+                formDataToSend.append("AudioFile", value);
+            } else {
+                formDataToSend.append(key, value);
+            }
         });
 
         try {
@@ -82,7 +86,6 @@ export default function CreateAudiobook() {
             }
 
             alert("Audiolibro creado exitosamente");
-
             navigate("/audiobooks");
 
             setFormData({
@@ -102,6 +105,7 @@ export default function CreateAudiobook() {
             setIsModalOpen(true);
         }
     };
+
 
     const handleAudioChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -217,17 +221,6 @@ export default function CreateAudiobook() {
                                     onChange={handleInputChange}
                                     className="grow px-3 py-2"
                                     placeholder="Género"
-                                    required
-                                />
-                            </label>
-                            <label className="input rounded-3xl w-full bg-white border border-neutral-600 flex items-center focus-within:border-emerald-400 focus-within:bg-gray-s100 hover:bg-gray-100">
-                                <input
-                                    type="text"
-                                    name="narratorId"
-                                    value={formData.narratorId}
-                                    onChange={handleInputChange}
-                                    className="grow px-3 py-2"
-                                    placeholder="ID del Autor"
                                     required
                                 />
                             </label>

@@ -32,7 +32,7 @@ export default function AuthorDetail() {
             <div className="grid grid-cols-12 mx-20 my-10">
                 <div className="justify-center items-center col-start-1 col-end-6 row-start-1">
                     <div>
-                        <Link to="/autors" className="btn btn-outline btn-accent">Volver Atras</Link>
+                        <Link to="/autors" className="btn btn-outline custom-button-blue">Volver Atras</Link>
                     </div>
                     <h1 className="text-5xl text-slate-800 my-6">
                         <strong>{author.name} {author.lastName}</strong>
@@ -97,7 +97,7 @@ function Card({ id, name, published, edition, bookCover }: Book) {
                     <p>{year}</p>
                 </div>
                 <div className="card-actions justify-center">
-                    <Link to={`/book/${id}`} className="btn btn-outline btn-accent w-3/5">
+                    <Link to={`/book/${id}`} className="btn btn-outline custom-button-orange w-3/5">
                         Más información
                     </Link>
                 </div>

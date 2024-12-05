@@ -32,7 +32,7 @@ export default function NarratorDetail() {
             <div className="grid grid-cols-11 mx-20 my-10 min-h-screen">
                 <div className="justify-center items-center col-start-1 col-end-6 row-start-1">
                     <div>
-                        <Link to="/narrators" className="btn btn-outline btn-accent">Volver Atras</Link>
+                        <Link to="/narrators" className="btn btn-outline custom-button-blue">Volver Atras</Link>
                     </div>
                     <h1 className="text-5xl text-slate-800 my-6">
                         <strong>{narrator.name} {narrator.lastName}</strong>
@@ -94,7 +94,7 @@ function Card({ id, name, published, edition, frontPage }: Audiobook) {
                     <p><strong>Edición:</strong> {edition}</p>
                 </div>
                 <div className="card-actions justify-center">
-                    <Link to={`/audiobook/${id}`} className="btn btn-outline btn-accent w-3/5">
+                    <Link to={`/audiobook/${id}`} className="btn btn-outline custom-button-orange w-3/5">
                         Más información
                     </Link>
                 </div>

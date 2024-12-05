@@ -19,6 +19,15 @@ body {
   .text-custom-Orange {
     color: #FA4616;
   }
+  .custom-button-orange {
+    color: #FA4616;
+    border-color: #FA4616;
+  }
+  .custom-button-orange:hover {
+    background-color: #FA4616;
+    color: #fff; /* Texto blanco para mayor contraste */
+  }
+
 
   /* white */
   .bg-custom-white {
@@ -66,6 +75,14 @@ body {
   }
   .text-custom-blue {
     color: #618EB4;
+  }
+  .custom-button-blue {
+    color: #618EB4;
+    border-color: #618EB4;
+  }
+  .custom-button-blue:hover {
+    background-color: #618EB4;
+    color: #fff; /* Texto blanco para mayor contraste */
   }
 
   /* Light Gray */

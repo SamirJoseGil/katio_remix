@@ -58,7 +58,7 @@ export default function AudioBookDetail() {
                 <div className="grid grid-cols-11 mx-20 my-10">
                     <div className="justify-center items-center col-start-1 col-end-6">
                         <div>
-                            <Link to="/audiobooks" className="btn btn-outline btn-accent">Volver Atras</Link>
+                            <Link to="/audiobooks" className="btn btn-outline custom-button-blue">Volver Atras</Link>
                         </div>
                         {audioBook && (
                             <>
@@ -90,10 +90,10 @@ export default function AudioBookDetail() {
                     </div>
                 </div>
                 <div className="text-center my-10">
-                    <button onClick={fetchAudioBookFile} className="btn btn-outline btn-accent mt-4 mx-4">
+                    <button onClick={fetchAudioBookFile} className="btn btn-outline custom-button-orange mt-4 mx-4">
                         Escuchar Audiolibro
                     </button>
-                    <button onClick={downloadAudioBookFile} className="btn btn-outline btn-accent mt-4">
+                    <button onClick={downloadAudioBookFile} className="btn btn-outline custom-button-orange mt-4">
                         Descargar Audiolibro
                     </button>
                     {mediaUrl && (

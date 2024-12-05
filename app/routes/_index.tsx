@@ -36,8 +36,8 @@ export default function Index() {
             El nombre surge de la inspiración en la comunidad indígena Katio, un grupo originario de la región del Urabá en Colombia, cuyo legado cultural y sabiduría ancestral han sido fundamentales para la preservación de tradiciones. Al igual que esta comunidad, la plataforma Katio busca fortalecer la identidad, el conocimiento y la integración de las comunidades más alejadas, proporcionando acceso a recursos educativos de manera inclusiva.
           </p>
         </div>
-        <div className="my-10 animate__animated animate__fadeInUp">
-          <Link to="/books" className="btn btn-outline btn-accent text-2xl">Ir a la Biblioteca</Link>
+        <div className="my-10 animate__animated animate__fadeInUp ">
+          <Link to="/books" className="btn btn-outline custom-button-blue  text-2xl ">Ir a la Biblioteca</Link>
         </div>
       </div>
       <Footer />

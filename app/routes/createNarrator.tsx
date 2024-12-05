@@ -131,7 +131,7 @@ export default function CreateNarrator() {
                             )}
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-outline btn-accent rounded-3xl w-1/5 my-10">
+                    <button type="submit" className="btn btn-outline custom-button-orange rounded-3xl w-1/5 my-10">
                         Crear Narrador
                     </button>
                 </form>
@@ -176,7 +176,7 @@ function ImageToBase64({ onBase64Generated }: { onBase64Generated: (base64: stri
 
     return (
         <div className="flex flex-col items-center">
-            <label className="btn btn-outline btn-accent cursor-pointer">
+            <label className="btn btn-outline custom-button-orange cursor-pointer">
                 Subir Portada
                 <input type="file" onChange={handleImageUpload} className="hidden" />
             </label>

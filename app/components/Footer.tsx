@@ -18,8 +18,9 @@ export default function Footer() {
             </nav>
             <nav>
                 <h6 className="footer-title">Fundación</h6>
-                <a className="link link-hover" href="#">Sobre nosotros</a>
-                <a className="link link-hover" href="#">Contacto</a>
+                <a className="link link-hover" href="https://secretosparacontar.org/nosotros/nuestra-historia/" target="_blank" rel="noopener noreferrer">Sobre nosotros</a>
+                <a className="" href="#">Contacto</a>
+                <a>(57) 604 322 06 90</a>
             </nav>
             <nav>
                 <h6 className="footer-title">Social</h6>

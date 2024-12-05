@@ -5,7 +5,7 @@
 export default function LogIn() {
     return (
         <div className="flex min-h-screen bg-gray-100 items-center justify-center">
-            <div className="bg-white shadow-lg overflow-hidden flex max-w-6xl rounded-3xl">
+            <div className="bg-slate-100 shadow-lg overflow-hidden flex max-w-6xl rounded-3xl">
                 <div className="p-12 lg:w-1/2">
                     {/* Título */}
                     <h2 className="text-4xl font-semibold text-center text-gray-800 mb-4">

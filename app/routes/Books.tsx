@@ -103,7 +103,7 @@ export default function Books() {
         <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
             <NavBar />
             <div className="my-10 min-h-screen">
-                <h1 className="text-5xl text-center my-2"><strong>sección de Libros</strong></h1>
+                <h1 className="text-5xl text-center my-2"><strong>Sección de Libros</strong></h1>
                 <div className="navbar border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>

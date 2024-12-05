@@ -25,6 +25,7 @@ export interface Book {
     bookCover: string;
     authorId: number;
     author: Author;
+    description: string;
 }
 
 export interface Narrator {

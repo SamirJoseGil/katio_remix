@@ -1,21 +1,20 @@
-import { useRef, useState } from "react";
-import { useLoaderData, Link } from "@remix-run/react";
+import { useRef, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 
-import { getAllAuthors, search } from "~/services/authorService";
-import { Data, Author } from "~/services/interfaces"
+import { getAllAudioBooks, search } from '~/services/audioBookService';
+import { Data, Audiobook } from '~/services/interfaces';
 
-import NotFoundModal from "~/components/NotFoundModal";
-import NavBar from "~/components/Navbar";
-import Footer from "~/components/Footer";
+import NotFoundModal from '~/components/NotFoundModal';
+import NavBar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-// Loader para obtener la lista de autores
 export function loader() {
-    return getAllAuthors();
+    return getAllAudioBooks();
 }
 
-export default function Autors() {
-    const data = useLoaderData<Data<Author>>();
-    const [searchResults, setSearchResults] = useState<Author[]>([]);
+export default function AudioBooks() {
+    const data = useLoaderData() as Data<Audiobook>;
+    const [searchResults, setSearchResults] = useState<Audiobook[]>([]);
 
     // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,44 +27,44 @@ export default function Autors() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = async () => {
-        setSearchResults([]);
 
+        setSearchResults([]);
         try {
             const response = await search(searchTerm);
-            const authors = response.responseElements;
-            if (authors.length === 0) {
+            const audioBook = response.responseElements;
+            if (audioBook.length === 0) {
                 setIsModalOpen(true);
             } else {
-                setSearchResults(authors);
+                setSearchResults(audioBook);
             }
         } catch {
             setIsModalOpen(true);
         }
     };
 
-    // Organizar Lista
+    // Organizar lista
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-    const [sortBy, setSortBy] = useState<"name" | "birthDate" | "none">("none");
+    const [sortBy, setSortBy] = useState<"name" | "published" | "none">("none");
     const [groupBy, setGroupBy] = useState<"none" | "firstLetter">("none");
 
-    const sortAuthors = (authors: Author[]) => {
-        return authors.sort((a, b) => {
+    const sortAudioBooks = (audiobooks: Audiobook[]) => {
+        return audiobooks.sort((a, b) => {
             if (sortBy === "name") {
                 return sortOrder === "asc"
                     ? a.name.localeCompare(b.name)
                     : b.name.localeCompare(a.name);
-            } else if (sortBy === "birthDate") {
+            } else if (sortBy === "published") {
                 return sortOrder === "asc"
-                    ? new Date(a.birthDate).getTime() - new Date(b.birthDate).getTime()
-                    : new Date(b.birthDate).getTime() - new Date(a.birthDate).getTime();
+                    ? new Date(a.published).getTime() - new Date(b.published).getTime()
+                    : new Date(b.published).getTime() - new Date(a.published).getTime();
             } else {
                 return 0;
             }
         });
     };
 
-    const Authors = searchResults.length > 0 ? searchResults : data.responseElements;
-    const sortedAuthors = sortAuthors(Authors);
+    const audiobooks = searchResults.length > 0 ? searchResults : data.responseElements;
+    const sortedAudioBooks = sortAudioBooks(audiobooks);
 
     const toggleGroupBy = () => {
         setGroupBy(groupBy === "firstLetter" ? "none" : "firstLetter");
@@ -75,36 +74,37 @@ export default function Autors() {
         if (sortBy === "none") {
             setSortBy("name");
         } else if (sortBy === "name") {
-            setSortBy("birthDate");
+            setSortBy("published");
         } else {
             setSortBy("none");
         }
     };
 
-    const groupAuthors = (authors: Author[]) => {
-        return authors.reduce((groups: { [key: string]: Author[] }, author: Author) => {
-            const key = author.name[0].toUpperCase();
+    const groupAudioBooks = (audiobooks: Audiobook[]) => {
+        return audiobooks.reduce((groups: { [key: string]: Audiobook[] }, audiobook: Audiobook) => {
+            const key = audiobook.name[0].toUpperCase();
             if (!groups[key]) groups[key] = [];
-            groups[key].push(author);
+            groups[key].push(audiobook);
             return groups;
         }, {});
     };
 
-    const authorsToDisplay = (): [string, Author[]][] | Author[] => {
-        const authors = searchResults.length > 0 ? searchResults : data.responseElements;
-        const sortedAuthors = sortAuthors(authors);
+    // Libros a mostrar
+    const audiobooksToDisplay = (): [string, Audiobook[]][] | Audiobook[] => {
+        const audiobooks = searchResults.length > 0 ? searchResults : data.responseElements;
+        const sortedAudioBooks = sortAudioBooks(audiobooks);
         if (groupBy === "firstLetter") {
-            return Object.entries(groupAuthors(sortedAuthors));
+            return Object.entries(groupAudioBooks(sortedAudioBooks));
         }
-        return sortedAuthors;
+        return sortedAudioBooks;
     };
 
 
     return (
-        <div className="items-center justify-center min-h-screen bg-slate-100 pt-28">
+        <div className="items-center justify-center bg-slate-100 pt-28">
             <NavBar />
-            <div className="my-10 min-h-screen">
-                <h1 className="text-5xl text-center my-2"><strong>Sección de Autores</strong></h1>
+            <div className='my-10 bg-slate-100'>
+                <h1 className="text-5xl text-center my-2"><strong>Sección de Audiolibros</strong></h1>
                 <div className="navbar border-slate-300 mx-auto justify-between container">
                     <div className="mx-20">
                         <a href="/audiobooks" className="btn btn-ghost text-xl">Audiolibros</a>
@@ -116,7 +116,7 @@ export default function Autors() {
                         <div className="relative w-full">
                             <input
                                 type="text"
-                                placeholder="Buscar un autor"
+                                placeholder="Buscar un audiolibro"
                                 className="input input-accent w-full bg-slate-100 border-slate-400 rounded-2xl border-2"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -151,7 +151,7 @@ export default function Autors() {
                         <strong className="text-slate-700">
                             {searchResults.length > 0 ? searchResults.length : data.totalElements}
                         </strong>{" "}
-                        autores
+                        audiolibros
                     </h3>
                     <div className="flex my-5 mx-10">
                         <button
@@ -172,11 +172,11 @@ export default function Autors() {
                     </div>
                     <div className="container mx-11">
                         {groupBy === "firstLetter" ? (
-                            (authorsToDisplay() as [string, Author[]][]).map(([key, authors]) => (
+                            (audiobooksToDisplay() as [string, Audiobook[]][]).map(([key, audiobooks]) => (
                                 <div key={key}>
                                     <h4 className="text-lg font-bold">{key}</h4>
                                     <div className="grid grid-cols-4 gap-4">
-                                        {authors.map((item: Author) => (
+                                        {audiobooks.map((item: Audiobook) => (
                                             <Card key={item.id} {...item} />
                                         ))}
                                     </div>
@@ -184,7 +184,7 @@ export default function Autors() {
                             ))
                         ) : (
                             <div className="grid grid-cols-4 gap-4">
-                                {(authorsToDisplay() as Author[]).map((item: Author) => (
+                                {(audiobooksToDisplay() as Audiobook[]).map((item: Audiobook) => (
                                     <Card key={item.id} {...item} />
                                 ))}
                             </div>
@@ -198,32 +198,34 @@ export default function Autors() {
     );
 }
 
-function Card({ id, name, lastName, country, birthDate, profilePicture }: Author) {
+function Card({ id, name, published, frontPage, narrator }: Audiobook) {
     const imageRef = useRef<HTMLImageElement | null>(null);
-    const year = new Date(birthDate).getFullYear();
+    const year = new Date(published).getFullYear();
 
     return (
-        <div className="card card-compact w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
+        <div className="card card-compact shadow-xl w-72 bg-slate-100 border-solid rounded-2xl border-2 border-slate-200">
             <div className="card-body place-content-between">
-                <a href={`/autor/${id}`}>
-                    <h4 className="card-title text-black font-bold">{name} {lastName}</h4>
+                <a href={`/audiobook/${id}`}>
+                    <h4 className="card-title text-black font-bold">{name}</h4>
                 </a>
-                <div className="my-1 mx-auto">
-                    <a href={`/autor/${id}`}><img
-                        ref={imageRef}
-                        src={profilePicture}
-                        alt={`${name} cover`}
-                        className="w-auto h-64 rounded-3xl"
-                    /></a>
-                </div>
-                <a href={`/autor/${id}`}>
-                    <div className="my-4 text-stone-700">
-                        <p>{country}</p>
+                <a href={`/audiobook/${id}`}>
+                    <div className="relative my-4 mx-auto">
+                        <img
+                            ref={imageRef}
+                            src={frontPage}
+                            alt={`${name} cover`}
+                            className="w-auto h-50 rounded-3xl"
+                        />
+                    </div>
+                </a>
+                <a href={`/audiobook/${id}`}>
+                    <div className='my-4 text-stone-700'>
+                        <p>{narrator.name} {narrator.lastName}</p>
                         <p>{year}</p>
                     </div>
                 </a>
                 <div className="card-actions justify-center">
-                    <Link to={`/autor/${id}`} className="btn btn-outline custom-button-orange w-3/5">
+                    <Link to={`/audiobook/${id}`} className="btn btn-outline custom-button-orange w-3/5">
                         Más información
                     </Link>
                 </div>

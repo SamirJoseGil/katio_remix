@@ -1,23 +1,3 @@
-
-// Response Interfaces
-
-export interface Data {
-    message: string;
-    statusCode: string;
-    totalElements: number;
-    responseElements: Author[];
-} 
-
-export interface Author {
-    id: number;
-    name: string;
-    lastName: string;
-    country: string;
-    birthDate: string;
-}
-
-// Methods
-
 export async function getAllAuthors() {
     const response = await fetch("http://localhost:5125/api/Author/GetAuthors");
     if (!response.ok) {
@@ -28,7 +8,7 @@ export async function getAllAuthors() {
 }
 
 export async function search(searchTerm: string) {
-    const response = await fetch(`http://localhost:5125/api/Author/search?searchTerm=${searchTerm}`, {
+    const response = await fetch(`http://localhost:5125/api/Author/SearchAuthor?searchTerm=${searchTerm}`, {
         method: 'POST',
     });
     if (!response.ok) {

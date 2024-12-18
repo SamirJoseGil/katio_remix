@@ -10,3 +10,96 @@ body {
     color-scheme: dark;
   }
 }
+
+@layer utilities {
+  /* Orange */
+  .bg-custom-Orange {
+    background-color: #FA4616;
+  }
+  .text-custom-Orange {
+    color: #FA4616;
+  }
+  .custom-button-orange {
+    color: #FA4616;
+    border-color: #FA4616;
+  }
+  .custom-button-orange:hover {
+    background-color: #FA4616;
+    color: #fff; /* Texto blanco para mayor contraste */
+  }
+
+
+  /* white */
+  .bg-custom-white {
+    background-color: #FFFFFF;
+  }
+  .text-custom-white {
+    color: #FFFFFF;
+  }
+
+  /* Beige */
+  .bg-custom-beige {
+    background-color: #ecead3;
+  }
+  .text-custom-beige {
+    color: #ecead3;
+  }
+
+  /* Gray */
+  .bg-custom-gray {
+    background-color: #cfd5c8;
+  }
+  .text-custom-gray {
+    color: #cfd5c8;
+  }
+
+  /* Cream */
+  .bg-custom-cream {
+    background-color: #f7f5eb;
+  }
+  .text-custom-cream {
+    color: #f7f5eb;
+  }
+
+  /* Dark Blue */
+  .bg-custom-dark-blue {
+    background-color: #002847;
+  }
+  .text-custom-dark-blue {
+    color: #002847;
+  }
+
+  /* Blue */
+  .bg-custom-blue {
+    background-color: #618EB4;
+  }
+  .text-custom-blue {
+    color: #618EB4;
+  }
+  .custom-button-blue {
+    color: #618EB4;
+    border-color: #618EB4;
+  }
+  .custom-button-blue:hover {
+    background-color: #618EB4;
+    color: #fff; /* Texto blanco para mayor contraste */
+  }
+
+  /* Light Gray */
+  .bg-custom-light-gray {
+    background-color: #e7e5d9;
+  }
+  .text-custom-light-gray {
+    color: #e7e5d9;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+textarea {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
